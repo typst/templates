@@ -25,7 +25,7 @@
   // The paper's content.
   body
 ) = {
-  // Set document metdata.
+  // Set document metadata.
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
