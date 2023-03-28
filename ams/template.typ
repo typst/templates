@@ -37,7 +37,7 @@
     names.join(", ", last: ", and ")
   }
 
-  // Set document metdata.
+  // Set document metadata.
   set document(title: title, author: names)
 
   // Set the body font. AMS uses the LaTeX font.
