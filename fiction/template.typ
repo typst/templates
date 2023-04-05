@@ -101,8 +101,14 @@
       pagebreak()
     })
 
+    // Create the heading numbering.
+    let number = if it.numbering != none {
+      counter(heading).display(it.numbering)
+      h(7pt, weak: true)
+    }
+
     v(5%)
-    text(2em, weight: 700, block(it.body))
+    text(2em, weight: 700, block([#number #it.body]))
     v(1.25em)
   }
   show heading: set text(11pt, weight: 400)
