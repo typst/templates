@@ -37,7 +37,7 @@
   page(align(center + horizon)[
     #text(2em)[*#title*]
     #v(2em, weak: true)
-    #text(1.6em)[#author]
+    #text(1.6em, author)
   ])
 
   // Display publisher info at the bottom of the second page.
