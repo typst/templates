@@ -112,6 +112,7 @@
         #it.body
         #v(normal-size, weak: true)
       ]
+      counter(figure.where(kind: "theorem")).update(0)
     } else {
       v(11pt, weak: true)
       number
@@ -157,6 +158,20 @@
 
     v(15pt, weak: true)
   }
+
+  // Theorems.
+  show figure.where(kind: "theorem"): it => block(above: 11.5pt, below: 11.5pt, {
+    strong({
+      it.supplement
+      if it.numbering != none {
+        [ ]
+        counter(heading).display()
+        it.counter.display(it.numbering)
+      }
+      [.]
+    })
+    emph(it.body)
+  })
 
   // Display the title and authors.
   v(35pt, weak: true)
@@ -219,19 +234,12 @@
 }
 
 // The ASM template also provides a theorem function.
-#let theorem-counter = counter("theorem")
-#let theorem(body, numbered: true) = locate(location => {
-  let lvl = counter(heading).at(location)
-  let i = theorem-counter.at(location).first()
-  let top = if lvl.len() > 0 { lvl.first() } else { 0 }
-  show: block.with(spacing: 11.5pt)
-  strong({
-    [Theorem]
-    if numbered [ #top.#i] + [.]
-  })
-  [ ]
-  emph(body)
-})
+#let theorem(body, numbered: true) = figure(
+  body,
+  kind: "theorem",
+  supplement: [Theorem],
+  numbering: if numbered { "1" },
+)
 
 // And a function for a proof.
 #let proof(body) = block(spacing: 11.5pt, {
