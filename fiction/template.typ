@@ -35,9 +35,9 @@
 
   // The first page.
   page(align(center + horizon)[
-    #text(2em)[*Liam's Playlist*]
+    #text(2em)[*#title*]
     #v(2em, weak: true)
-    #text(1.6em)[Janet Doe]
+    #text(1.6em)[#author]
   ])
 
   // Display publisher info at the bottom of the second page.
@@ -75,7 +75,7 @@
       // Are we on an odd page?
       let i = counter(page).at(loc).first()
       if calc.odd(i) {
-        return text(0.95em, smallcaps("Liams Playlist"))
+        return text(0.95em, smallcaps(title))
       }
 
       // Are we on a page that starts a chapter? (We also check
