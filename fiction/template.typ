@@ -35,9 +35,9 @@
 
   // The first page.
   page(align(center + horizon)[
-    #text(2em)[*Liam's Playlist*]
+    #text(2em)[*#title*]
     #v(2em, weak: true)
-    #text(1.6em)[Janet Doe]
+    #text(1.6em, author)
   ])
 
   // Display publisher info at the bottom of the second page.
@@ -75,7 +75,7 @@
       // Are we on an odd page?
       let i = counter(page).at(loc).first()
       if calc.odd(i) {
-        return text(0.95em, smallcaps("Liams Playlist"))
+        return text(0.95em, smallcaps(title))
       }
 
       // Are we on a page that starts a chapter? (We also check
@@ -101,8 +101,14 @@
       pagebreak()
     })
 
+    // Create the heading numbering.
+    let number = if it.numbering != none {
+      counter(heading).display(it.numbering)
+      h(7pt, weak: true)
+    }
+
     v(5%)
-    text(2em, weight: 700, block(it.body))
+    text(2em, weight: 700, block([#number #it.body]))
     v(1.25em)
   }
   show heading: set text(11pt, weight: 400)
