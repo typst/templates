@@ -46,6 +46,7 @@ The award will be presented to our department in a formal ceremony that will tak
 #figure(
   rect(width: 100%, height: 80pt, fill: white, stroke: 1pt),
   caption: [Our new department rectangle],
+  kind: image
 )
 
 #article[
