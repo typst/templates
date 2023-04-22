@@ -47,7 +47,7 @@
   set page(
     paper: paper-size,
     // The margins depend on the paper size.
-    margin: if paper-size != "a4-paper" {
+    margin: if paper-size != "a4" {
       (
         top: (116pt / 279mm) * 100%,
         left: (126pt / 216mm) * 100%,
