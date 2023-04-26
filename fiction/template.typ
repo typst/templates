@@ -86,7 +86,7 @@
       }
 
       // Find the heading of the section we are currently in.
-      let before = query(heading, before: loc)
+      let before = query(selector(heading).before(loc), loc)
       if before != () {
         align(right, text(0.95em, smallcaps(before.last().body)))
       }
