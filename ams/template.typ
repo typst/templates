@@ -148,9 +148,10 @@
     if it.has("caption") {
       // Gap defaults to 17pt.
       v(if it.has("gap") { it.gap } else { 17pt }, weak: true)
-      smallcaps[Figure]
+      smallcaps(it.supplement)
       if it.numbering != none {
-        [ #counter(figure).display(it.numbering)]
+        [ ]
+        it.counter.display(it.numbering)
       }
       [. ]
       it.caption

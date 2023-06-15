@@ -63,6 +63,28 @@ $ integral_(-oo)^oo e^(-x^2) dif x = sqrt(pi) $
   what we have just done $x^2 = (−x)^2 > 0$. So in all cases $x^2 ≥ 0$.
 ]
 
+#figure(
+  table(
+    columns: (1fr, auto, auto),
+    inset: 10pt,
+    align: horizon,
+    [], [*Area*], [*Parameters*],
+    [*Cylinder*],
+    $ pi h (D^2 - d^2) / 4 $,
+    [
+      $h$: height \
+      $D$: outer radius \
+      $d$: inner radius
+    ],
+    [*Tetrahedron*],
+    $ sqrt(2) / 12 a^3 $,
+    [$a$: edge length]
+  ),
+  caption: "Solids",
+) <table:solids>
+
+You can use tables like @table:solids.
+
 = Introduction
 This is a new section.
 
