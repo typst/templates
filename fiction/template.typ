@@ -54,8 +54,7 @@
   }
 
   // Books like their empty pages.
-  pagebreak()
-  pagebreak()
+  pagebreak(to: "odd")
 
   // Configure paragraph properties.
   set par(leading: 0.78em, first-line-indent: 12pt, justify: true)
@@ -95,11 +94,8 @@
 
   // Configure chapter headings.
   show heading.where(level: 1): it => {
-    // Always start on even pages.
-    pagebreak()
-    counter(page).display(i => if calc.odd(i) {
-      pagebreak()
-    })
+    // Always start on odd pages.
+    pagebreak(to: "odd")
 
     // Create the heading numbering.
     let number = if it.numbering != none {
