@@ -154,7 +154,7 @@
         it.counter.display(it.numbering)
       }
       [. ]
-      it.caption
+      it.caption.body
     }
 
     v(15pt, weak: true)
