@@ -22,6 +22,9 @@
   // works.
   bibliography-file: none,
 
+  // Font to be used throughout the document.
+  font: "Times New Roman",
+
   // The paper's content.
   body
 ) = {
@@ -29,7 +32,7 @@
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
-  set text(font: "STIX Two Text", size: 10pt)
+  set text(font: font, size: 10pt)
 
   // Configure the page.
   set page(
@@ -49,6 +52,25 @@
   // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 0.65em)
+
+  // Configure appearance of equation references
+  show ref: it => {
+    let eq = math.equation
+    let el = it.element
+    if el != none and el.func() == eq {
+      // Override equation references.
+      link(
+        el.label,
+        numbering(
+          el.numbering,
+          ..counter(eq).at(el.location())
+        )
+      )
+    } else {
+      // Other references as usual.
+      it
+    }
+  }
 
   // Configure lists.
   set enum(indent: 10pt, body-indent: 9pt)
