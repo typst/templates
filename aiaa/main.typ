@@ -1,20 +1,21 @@
+//***************************************************************
+// AIAA TYPST TEMPLATE
+// 
+// The author of this work hereby waives all claim of copyright
+// (economic and moral) in this work and immediately places it 
+// in the public domain; it may be used, distorted or 
+// in any manner whatsoever without further attribution or notice
+// to the creator. The author is not responsible for any liability 
+// from the usage or dissemination of this code.
+//
+// Author: Isaac Weintraub (06 NOV 2023) 
+// BAMDONE!
+
+
 #import "template.typ": *
 #show: aiaa.with(
     title: "Preperation of Papers for AIAA Technical Conferences",
 )
-//    authors: (
-//     (
-//       name: "First A. Author", "Second B. Autor Jr."
-//       dep
-//     ),
-//    ) 
-// )
-
-// #align(center)[
-//   #text(24pt, font: "Times New Roman", weight: "bold", 
-//     [Preperation of Papers for AIAA Technical Conferences]
-//   )
-//   ]
 
 #align(center)[
   #text(16pt, top-edge: 16pt,
@@ -210,52 +211,3 @@ An Acknowledgments section, if used, immediately precedes the References. Sponso
 The following pages are intended to provide examples of the different reference types. All references should be in 9-point font, with the first line flush left and reference numbers inserted in brackets. You are not required to indicate the type of reference; different types are shown here for illustrative purposes only. The DOI (digital object identifier) should be incorporated in every reference for which it is available (see Ref. 1 sample); for more information on DOIs, visit www.doi.org or www.crossref.org. #cite("example","Vatistas1986","tolkien54")
 
 #bibliography("refs.bib", style: "ieee")
-
-// Periodicals
-// [1]	Vatistas, G. H., Lin, S., and Kwok, C. K., “Reverse Flow Radius in Vortex Chambers,” AIAA Journal, Vol. 24, No. 11, 1986, pp. 1872, 1873.
-// 	doi: 10.2514/3.13046
-// [2]	Alyanak, E. J., and Pendleton, E., “Aeroelastic Tailoring and Active Aeroelastic Wing Impact on a Lambda Wing Configuration,” Journal of Aircraft, published online 10 Nov. 2016.
-// 	doi: 10.2514/1.C033040
-// [3]	Dornheim, M. A., “Planetary Flight Surge Faces Budget Realities,” Aviation Week and Space Technology, Vol. 145, No. 24, 9 Dec. 1996, pp. 44–46.
-// [4]	Terster, W., “NASA Considers Switch to Delta 2,” Space News, Vol. 8, No. 2, 13–19 Jan. 1997, pp. 1, 18.
-// All of the preceding information is required. The journal issue number (“No. 11” in Ref. 1) is preferred, but the month (Nov.) can be substituted if the issue number is not available. Use the complete date for daily and weekly publications. Transactions follow the same style as other journals.
-
-// Books
-// [5]	Peyret, R., and Taylor, T. D., Computational Methods in Fluid Flow, 2nd ed., Springer-Verlag, New York, 1983, Chaps. 7, 14.
-// [6]	Oates, G. C. (ed.), Aerothermodynamics of Gas Turbine and Rocket Propulsion, AIAA Education Series, AIAA, New York, 1984, pp. 19, 136.
-// [7]	Volpe, R., “Techniques for Collision Prevention, Impact Stability, and Force Control by Space Manipulators,” Teleoperation and Robotics in Space, edited by S. B. Skaar and C. F. Ruoff, Progress in Astronautics and Aeronautics, AIAA, Washington, DC, 1994, pp. 175–212.
-// Publisher, place, and date of publication are required for all books. No state or country is required for major cities: New York, London, Moscow, etc. A differentiation must always be made between Cambridge, MA, and Cambridge, England, UK. Note that series titles are in Roman type.
-
-// Proceedings
-// [8]	Thompson, C. M., “Spacecraft Thermal Control, Design, and Operation,” AIAA Guidance, Navigation, and Control Conference, CP849, Vol. 1, AIAA, Washington, DC, 1989, pp. 103–115
-// [9]	Chi, Y. (ed.), Fluid Mechanics Proceedings, NASA SP-255, 1993.
-// [10] Morris, J. D., “Convective Heat Transfer in Radially Rotating Ducts,” Proceedings of the Annual Heat Transfer Conference, edited by B. Corbell, Vol. 1, Inst. of Mechanical Engineering, New York, 1992, pp. 227–234.
-
-
-// Reports, Theses, and Individual Papers
-// [11]  Chapman, G. T., and Tobak, M., “Nonlinear Problems in Flight Dynamics,” NASA TM-85940, 1984.
-// [12]  Brandis, A. M., Johnston, C. O., and Cruden, B. A., “Nonequilibrium Radiation for Earth Entry,” AIAA Paper 2016-3690, June 2016.
-// [13] Steger, J. L., Jr., Nietubicz, C. J., and Heavey, J. E., “A General Curvilinear Grid Generation Program for Projectile Configurations,” U.S. Army Ballistic Research Lab., Rept. ARBRL-MR03142, Aberdeen Proving Ground, MD, Oct. 1981.
-// [14] Tseng, K., “Nonlinear Green’s Function Method for Transonic Potential Flow,” Ph.D. Dissertation, Aeronautics and Astronautics Dept., Boston Univ., Cambridge, MA, 1983.
-// Government agency reports do not require locations. For reports such as NASA TM-85940, neither insert nor delete dashes; leave them as provided. Place of publication should be given, although it is not mandatory, for military and company reports. Always include a city and state for universities. Papers need only the name of the sponsor; neither the sponsor’s location nor the conference name and location is required. Do not confuse proceedings references with conference papers.
-
-// Electronic Publications
-// Regularly issued electronic journals and other publications are permitted as references. Include the DOI if provided; otherwise provide the full URL. Archived data sets also may be referenced as long as the material is openly accessible, and the repository is committed to archiving the data indefinitely. References to electronic data available only from personal websites or commercial, academic, or government ones where there is no commitment to archiving the data are not permitted in the reference list.
-//  [15] Atkins, C. P., and Scantelbury, J. D., “The Activity Coefficient of Sodium Chloride in a Simulated Pore Solution Environment,” Journal of Corrosion Science and Engineering [online journal], Vol. 1, No. 1, Paper 2, URL: http://www.cp/umist.ac.uk/JCSE/vol1/vol1.html [retrieved 13 April 1998].
-// [16] Vickers, A., “10-110 mm/hr Hypodermic Gravity Design A,” Rainfall Simulation Database [online database], URL: http://www.geog.le.ac.uk/bgrg/lab.htm [retrieved 15 March 2006].
-// Break website addresses after punctuation, and do not hyphenate at line breaks.
-// Computer Software
-// [17] TAPP, Thermochemical and Physical Properties, Software Package, Ver. 1.0, E. S. Microware, Hamilton, OH, 1992.
-// Include a version number and the company name and location of software packages.
-// Patents
-// Patents appear infrequently. Be sure to include the patent number and date.
-// [18] Scherrer, R., Overholster, D., and Watson, K., Lockheed Corp., Burbank, CA, U.S. Patent Application for a “Vehicle,” Docket No. P-01-1532, filed 11 Feb. 1979.
-// Private Communications and Websites
-// References to private communications and personal website addresses are not permitted. They may, however, be incorporated into the main text of a manuscript or may appear in footnotes.
-// Unpublished Papers and Books
-// Unpublished works can be used as references as long as they are being considered for publication or can be located by the reader (such as papers that are part of an archival collection). If a journal paper or a book is being considered for publication, choose the format that reflects the status of the work (depending upon whether it has been accepted for publication):
-// [19] Doe, J., “Title of Paper,” Name of Journal (to be published).
-// [20] Doe, J., “Title of Chapter,” Name of Book, edited by…, Publisher’s name and location (to be published).
-// [21] Doe, J., “Title of Work,” Name of Archive, Univ. (or organization), City, State, Year (unpublished).
-// Unpublished works in an archive must include the name of the archive and the name and location of the university or other organization where the archive is held. Also include any cataloging information that may be provided.
-
