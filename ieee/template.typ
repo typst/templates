@@ -23,7 +23,7 @@
   bibliography-file: none,
 
   // Font to be used throughout the document.
-  font: "Times New Roman",
+  font: "STIX Two Text",
 
   // The paper's content.
   body
