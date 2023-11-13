@@ -52,17 +52,12 @@
 
   // Configure appearance of equation references
   show ref: it => {
-    let eq = math.equation
-    let el = it.element
-    if el != none and el.func() == eq {
+    if it.element != none and it.element.func() == math.equation {
       // Override equation references.
-      link(
-        el.label,
-        numbering(
-          el.numbering,
-          ..counter(eq).at(el.location())
-        )
-      )
+      link(it.element.location(), numbering(
+        it.element.numbering,
+        ..counter(math.equation).at(it.element.location())
+      ))
     } else {
       // Other references as usual.
       it
