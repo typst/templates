@@ -22,9 +22,6 @@
   // works.
   bibliography-file: none,
 
-  // Font to be used throughout the document.
-  font: "STIX Two Text",
-
   // The paper's content.
   body
 ) = {
@@ -32,7 +29,7 @@
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
-  set text(font: font, size: 10pt)
+  set text(font: "STIX Two Text", size: 10pt)
 
   // Configure the page.
   set page(
