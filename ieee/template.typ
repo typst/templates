@@ -50,6 +50,20 @@
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 0.65em)
 
+  // Configure appearance of equation references
+  show ref: it => {
+    if it.element != none and it.element.func() == math.equation {
+      // Override equation references.
+      link(it.element.location(), numbering(
+        it.element.numbering,
+        ..counter(math.equation).at(it.element.location())
+      ))
+    } else {
+      // Other references as usual.
+      it
+    }
+  }
+
   // Configure lists.
   set enum(indent: 10pt, body-indent: 9pt)
   set list(indent: 10pt, body-indent: 9pt)
