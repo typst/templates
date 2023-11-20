@@ -1,6 +1,6 @@
 #import "template.typ": *
 #show: dept-news.with(
-  title: "Chemistry Department",
+  title: [Chemistry Department],
   edition: [
     March 18th, 2023 \
     Purview College

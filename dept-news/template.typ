@@ -5,7 +5,7 @@
 // it as the fun newsletter of a college department.
 #let dept-news(
   // The newsletter's title.
-  title: "Newsletter title",
+  title: [Newsletter title],
 
   // The edition, displayed at the top of the sidebar.
   edition: none,

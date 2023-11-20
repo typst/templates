@@ -1,6 +1,6 @@
 #import "template.typ": *
 #show: book.with(
-  title: "Liam's Playlist",
+  title: [Liam's Playlist],
   author: "Janet Doe",
   dedication: [for Rachel],
   publishing-info: [

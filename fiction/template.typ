@@ -2,7 +2,7 @@
 // it as a simple fiction book.
 #let book(
   // The book's title.
-  title: "Book title",
+  title: [Book title],
 
   // The book's author.
   author: "Author",

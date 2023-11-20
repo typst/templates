@@ -8,7 +8,7 @@
 // it as an article in the style of the American Mathematical Society.
 #let ams-article(
   // The article's title.
-  title: "Paper title",
+  title: [Paper title],
 
   // An array of authors. For each author you can specify a name,
   // department, organization, location, and email. Everything but
@@ -132,7 +132,7 @@
   show math.equation: set text(weight: 400)
 
   // Configure citation and bibliography styles.
-  set bibliography(style: "springer-mathphys", title: "References")
+  set bibliography(style: "springer-mathphys", title: [References])
 
   show figure: it => {
     show: pad.with(x: 23pt)

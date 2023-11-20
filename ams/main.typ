@@ -1,6 +1,6 @@
 #import "template.typ": *
 #show: ams-article.with(
-  title: "Mathematical Theorems",
+  title: [Mathematical Theorems],
   authors: (
     (
       name: "Ralph Howard",
