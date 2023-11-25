@@ -2,7 +2,7 @@
 // it as an article in the style of the IEEE.
 #let ieee(
   // The paper's title.
-  title: [Paper Title],
+  title: "Paper Title",
 
   // An array of authors. For each author you can specify a name,
   // department, organization, location, and email. Everything but
