@@ -154,6 +154,8 @@
   // Start two column mode and configure paragraph properties.
   show: columns.with(2, gutter: 12pt)
   set par(justify: true, first-line-indent: 1em)
+  // Do not indent first line for outlines.
+  show outline: set par(justify: true, first-line-indent: 0em)
   show par: set block(spacing: 0.65em)
 
   // Display abstract and index terms.
