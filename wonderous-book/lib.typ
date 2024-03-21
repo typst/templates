@@ -69,7 +69,7 @@
 
     // The header always contains the book title on odd pages and
     // the chapter title on even pages, unless the page is one
-    // the starts a chapter (the chapter title is obvious then).
+    // that starts a chapter (the chapter title is obvious then).
     header: locate(loc => {
       // Are we on an odd page?
       let i = counter(page).at(loc).first()
