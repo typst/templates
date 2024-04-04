@@ -64,11 +64,10 @@
     }
   )
 
-  // Configure equation numbering and spacing and font.
+  // Configure equation numbering and spacing.
   set math.equation(numbering: "(1)")
   show math.equation: set block(spacing: 0.65em)
-  show math.equation: set text(font: "TeX Gyre Termes Math", size: 10pt)
-  
+
   // Configure appearance of equation references
   show ref: it => {
     if it.element != none and it.element.func() == math.equation {
