@@ -177,7 +177,7 @@
   // Display abstract and index terms.
   if abstract != none [
     #set text(9pt, weight: 700)
-    #h(1em) _Abstract_---#abstract
+    #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
 
     #if index-terms != () [
       #h(1em)_Index terms_---#index-terms.join(", ")
