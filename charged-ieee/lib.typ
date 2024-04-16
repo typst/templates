@@ -31,7 +31,23 @@
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
-  set text(font: "STIX Two Text", size: 10pt)
+  set text(font: "TeX Gyre Termes", size: 10pt)
+  
+  // Enums numbering
+  set enum(numbering: "1)a)i)")
+
+  // Tables & figures
+  show figure.where(kind: table): set figure.caption(position: top)
+  show figure.where(kind: table): set text(size: 8pt)
+  show figure.caption.where(kind: table): smallcaps
+  show figure.where(kind: table): set figure(numbering: "I")
+  
+  show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
+  show figure.where(kind: raw): set figure(supplement: [Fig.], numbering: "1")
+  show figure.caption: set text(size: 8pt)
+
+  // Code blocks
+  show raw: set text(font: "TeX Gyre Cursor", size: 10pt)
 
   // Configure the page.
   set page(
@@ -71,7 +87,7 @@
   set list(indent: 10pt, body-indent: 9pt)
 
   // Configure headings.
-  set heading(numbering: "I.A.1.")
+  set heading(numbering: "I.A.a)")
   show heading: it => locate(loc => {
     // Find out the final number of the heading counter.
     let levels = counter(heading).at(loc)
@@ -110,7 +126,7 @@
     ] else [
       // Third level headings are run-ins too, but different.
       #if it.level == 3 {
-        numbering("1)", deepest)
+        numbering("a)", deepest)
         [ ]
       }
       _#(it.body):_
@@ -119,7 +135,7 @@
 
   // Display the paper's title.
   v(3pt, weak: true)
-  align(center, text(18pt, title))
+  align(center, text(24pt, title))
   v(8.35mm, weak: true)
 
   // Display the authors list.
@@ -160,7 +176,7 @@
 
   // Display abstract and index terms.
   if abstract != none [
-    #set text(weight: 700)
+    #set text(9pt, weight: 700)
     #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
 
     #if index-terms != () [
