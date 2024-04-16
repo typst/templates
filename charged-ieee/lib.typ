@@ -194,5 +194,4 @@
     set std-bibliography(title: text(10pt)[References], style: "ieee")
     bibliography
   }
-  
 }
