@@ -147,7 +147,7 @@
       columns: slice.len() * (1fr,),
       gutter: 12pt,
       ..slice.map(author => align(center, {
-        text(9pt, author.name)
+        text(12pt, author.name)
         if "department" in author [
           \ #emph(author.department)
         ]
