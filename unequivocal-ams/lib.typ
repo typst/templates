@@ -5,7 +5,7 @@
 #let normal-size = 10.00002pt
 #let large-size = 11.74988pt
 
-// Workaround for the lack of an `std` scope.
+// Workaround for the lack of a `std` scope.
 #let std-bibliography = bibliography
 
 // This function gets your whole document as its `body` and formats
