@@ -21,7 +21,6 @@
 ) = {
   // Configure page and text properties.
   set page(margin: (top: 2cm))
-  set text(font: "PT Sans")
 
   // Display sender at top of page. If there's no sender
   // add some hidden text to keep the same spacing.

@@ -1,5 +1,7 @@
 #import "@preview/appreciated-letter:0.1.0": letter
 
+#set text(font: "PT Sans")
+
 #show: letter.with(
   sender: [
     Jane Smith, Universal Exports, 1 Heavy Plaza, Morristown, NJ 07964
