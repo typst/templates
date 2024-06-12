@@ -37,6 +37,7 @@
   set enum(numbering: "1)a)i)")
 
   // Tables & figures
+  set figure(placement: top)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 8pt)
   show figure.caption.where(kind: table): smallcaps
