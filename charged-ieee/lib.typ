@@ -44,7 +44,6 @@
   show figure.where(kind: table): set figure(numbering: "I")
   
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
-  show figure.where(kind: raw): set figure(supplement: [Fig.], numbering: "1")
   show figure.caption: set text(size: 8pt)
 
   // Code blocks
