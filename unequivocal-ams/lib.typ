@@ -115,7 +115,7 @@
         #it.body
         #v(normal-size, weak: true)
       ]
-      counter(figure.where(kind: "theorem")).update(0)
+      counter(figure.where(kind: "enunciation")).update(0)
     } else {
       v(11pt, weak: true)
       number
@@ -161,20 +161,9 @@
 
     v(15pt, weak: true)
   }
-
-  // Theorems.
-  show figure.where(kind: "theorem"): it => block(above: 11.5pt, below: 11.5pt, {
-    strong({
-      it.supplement
-      if it.numbering != none {
-        [ ]
-        counter(heading).display()
-        it.counter.display(it.numbering)
-      }
-      [.]
-    })
-    emph(it.body)
-  })
+  
+  // enunciations are styled by their style function not their kind
+  show figure.where(kind: "enunciation"): it => block(above: 11.5pt, below: 11.5pt, it.body)
 
   // Display the title and authors.
   v(35pt, weak: true)
@@ -236,18 +225,84 @@
   }
 }
 
-// The ASM template also provides a theorem function.
-#let theorem(body, numbered: true) = figure(
-  body,
-  kind: "theorem",
-  supplement: [Theorem],
-  numbering: if numbered { "1" },
-)
+// AMS Style Guide - 4.1.1 - Theorem Style Enunciations
+#let theorem-style(body, supplement, numbered) = {
+  figure(
+    {
+      strong({
+        supplement
+        if numbered {
+          [ ]
+          counter(heading).display()
+          counter(figure.where(kind: "enunciation")).display("1")
+        }
+        [.]
+      })
+      emph(body)
+    },
+    kind: "enunciation",
+    supplement: supplement,
+    numbering: if numbered { "1" },
+  )
+}
 
-// And a function for a proof.
-#let proof(body) = block(spacing: 11.5pt, {
-  emph[Proof.]
+// AMS Style Guide - 4.1.2 - Proof Style Enunciations
+#let proof-style(body, supplement) = block(spacing: 11.5pt, {
+  emph[#supplement.]
   [ ] + body
   h(1fr)
   box(scale(160%, origin: bottom + right, sym.square.stroked))
 })
+
+// AMS Style Guide - 4.1.3 - Definition Style Enunciations
+#let definition-style(body, supplement, numbered) = figure(
+  {
+    strong({
+      supplement
+      if numbered {
+        [ ]
+        counter(heading).display()
+        counter(figure.where(kind: "enunciation")).display("1")
+      }
+      [.]
+    })
+    body
+  },
+  kind: "enunciation",
+  supplement: supplement,
+  numbering: if numbered { "1" },
+)
+
+// AMS Style Guide - 4.1.4 - Remark Style Enunciations
+#let remark-style(body, supplement, numbered) = figure(
+  {
+    emph(supplement)
+    if numbered {
+      [ ]
+      counter(heading).display()
+      counter(figure.where(kind: "enunciation")).display("1")
+    }
+    [.]
+    body
+  },
+  kind: "enunciation",
+  supplement: supplement,
+  numbering: if numbered { "1" },
+)
+
+// Common Theorem Style Enunciations
+#let conjecture(body, numbered: true) = theorem-style(body, "Conjecture", numbered)
+#let corollary(body, numbered: true) = theorem-style(body, "Corollary", numbered)
+#let lemma(body, numbered: true) = theorem-style(body, "Lemma", numbered)
+#let proposition(body, numbered: true) = theorem-style(body, "Proposition", numbered)
+#let theorem(body, numbered: true) = theorem-style(body, "Theorem", numbered)
+
+// Common Proof Style Enunciations
+#let proof(body) = proof-style(body, "Proof")
+
+// Common Definition Style Enunciations
+#let definition(body, numbered: true) = definition-style(body, "Definition", numbered)
+
+// Common Remark Style Enunciations (Note, remark style enunciations with proofs should be styled as theorems.)
+#let remark(body, numbered: true) = remark-style(body, "Remark", numbered)
+#let notation(body, numbered: true) = remark-style(body, "Notation", numbered)
