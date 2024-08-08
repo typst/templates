@@ -133,6 +133,10 @@
     ]
   })
 
+  // Style bibliography.
+  show std-bibliography: set text(8pt)
+  set std-bibliography(title: text(10pt)[References], style: "ieee")
+
   // Display the paper's title.
   v(3pt, weak: true)
   align(center, text(24pt, title))
@@ -189,9 +193,5 @@
   body
 
   // Display bibliography.
-  if bibliography != none {
-    show std-bibliography: set text(8pt)
-    set std-bibliography(title: text(10pt)[References], style: "ieee")
-    bibliography
-  }
+  bibliography
 }
