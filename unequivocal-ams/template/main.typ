@@ -4,12 +4,12 @@
   title: [Mathematical Theorems],
   authors: (
     (
-      name: "Ralph Howard",
+      name: "Janet Doe",
       department: [Department of Mathematics],
-      organization: [University of South Carolina],
-      location: [Columbia, SC 29208],
-      email: "howard@math.sc.edu",
-      url: "www.math.sc.edu/~howard"
+      organization: [University of Exampleville],
+      location: [Tennessee, TN 59341],
+      email: "jdoe@math.ue.edu",
+      url: "math.ue.edu/~jdoe"
     ),
   ),
   abstract: lorem(100),
