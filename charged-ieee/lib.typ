@@ -47,7 +47,7 @@
   show figure.caption: set text(size: 8pt)
 
   // Code blocks
-  show raw: set text(font: "TeX Gyre Cursor", size: 10pt)
+  show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)
 
   // Configure the page.
   set page(
