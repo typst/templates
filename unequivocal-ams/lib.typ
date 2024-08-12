@@ -106,6 +106,7 @@
     // Level 1 headings are centered and smallcaps.
     // The other ones are run-in.
     set text(size: normal-size, weight: 400)
+    set par(first-line-indent: 0em)
     if it.level == 1 {
       set align(center)
       set text(size: normal-size)
