@@ -32,7 +32,7 @@
 
   // Set the body font.
   set text(font: "TeX Gyre Termes", size: 10pt)
-  
+
   // Enums numbering
   set enum(numbering: "1)a)i)")
 
@@ -42,7 +42,7 @@
   show figure.where(kind: table): set text(size: 8pt)
   show figure.caption.where(kind: table): smallcaps
   show figure.where(kind: table): set figure(numbering: "I")
-  
+
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
   show figure.caption: set text(size: 8pt)
 
@@ -161,9 +161,13 @@
         if "location" in author [
           \ #author.location
         ]
-        if "email" in author [
-          \ #link("mailto:" + author.email)
-        ]
+        if "email" in author {
+          if type(author.email) == str [
+            \ #link("mailto:" + author.email)
+          ] else [
+            \ #author.email
+          ]
+        }
       }))
     )
 
