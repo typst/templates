@@ -134,12 +134,13 @@
   })
 
   // Style bibliography.
-  show std-bibliography: set text(size: 8pt); set par(leading: 0.5em); set block(spacing: 0.5em)
+  show std-bibliography: set text(size: 8pt)
+  show std-bibliography: set block(spacing: 0.5em)
   set std-bibliography(title: text(10pt)[References], style: "ieee")
 
   // Display the paper's title.
   v(3pt, weak: true)
-  align(center, par(leading: 0.5em, text(size: 24pt, weight:500, spacing: 125%, title)))
+  align(center, par(leading: 0.5em, text(size: 24pt, weight: 500, spacing: 125%, title)))
   v(8.35mm, weak: true)
 
   // Display the authors list.
