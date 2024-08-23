@@ -101,11 +101,11 @@
     if it.level == 1 [
       // First-level headings are centered smallcaps.
       // We don't want to number of the acknowledgment section.
-      #let is-ack = it.body in ([Acknowledgment], [Acknowledgement])
+      #let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
       #set align(center)
-      #set text(if is-ack { 10pt } else { 12pt })
+      #set text(if is-ack { 10pt } else { 11pt })
       #show: smallcaps
-      #v(20pt, weak: true)
+      #v(15pt, weak: true)
       #if it.numbering != none and not is-ack {
         numbering("I.", deepest)
         h(7pt, weak: true)
@@ -134,15 +134,17 @@
   })
 
   // Style bibliography.
-  show std-bibliography: set text(8pt)
+  show std-bibliography: set text(size: 8pt); set par(leading: 0.5em); set block(spacing: 0.5em)
   set std-bibliography(title: text(10pt)[References], style: "ieee")
 
   // Display the paper's title.
   v(3pt, weak: true)
-  align(center, text(24pt, title))
+  align(center, par(leading: 0.5em, text(size: 24pt, weight:500, spacing: 125%, title)))
   v(8.35mm, weak: true)
 
   // Display the authors list.
+  set par(leading: 0.6em)
+  set text(size: 10pt, spacing: 130%)
   for i in range(calc.ceil(authors.len() / 3)) {
     let end = calc.min((i + 1) * 3, authors.len())
     let is-last = authors.len() == end
@@ -151,7 +153,7 @@
       columns: slice.len() * (1fr,),
       gutter: 12pt,
       ..slice.map(author => align(center, {
-        text(12pt, author.name)
+        text(size: 11pt, author.name)
         if "department" in author [
           \ #emph(author.department)
         ]
@@ -175,12 +177,12 @@
       v(16pt, weak: true)
     }
   }
-  v(40pt, weak: true)
+  v(30pt, weak: true)
 
   // Start two column mode and configure paragraph properties.
   show: columns.with(2, gutter: 12pt)
-  set par(justify: true, first-line-indent: 1em)
-  show par: set block(spacing: 0.65em)
+  set par(justify: true, first-line-indent: 1em, leading: 0.45em)
+  show par: set block(spacing: 0.45em)
 
   // Display abstract and index terms.
   if abstract != none [
@@ -188,12 +190,13 @@
     #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
 
     #if index-terms != () [
-      #h(1em)_Index terms_---#h(weak: true, 0pt)#index-terms.join(", ")
+      #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
     ]
     #v(2pt)
   ]
 
   // Display the paper's contents.
+  set par(leading: 0.5em)
   body
 
   // Display bibliography.
