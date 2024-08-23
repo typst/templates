@@ -31,7 +31,7 @@
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
-  set text(font: "TeX Gyre Termes", size: 10pt)
+  set text(font: "TeX Gyre Termes", size: 10pt, spacing: 125%)
 
   // Enums numbering
   set enum(numbering: "1)a)i)")
@@ -145,7 +145,6 @@
 
   // Display the authors list.
   set par(leading: 0.6em)
-  set text(size: 10pt, spacing: 130%)
   for i in range(calc.ceil(authors.len() / 3)) {
     let end = calc.min((i + 1) * 3, authors.len())
     let is-last = authors.len() == end
@@ -187,7 +186,7 @@
 
   // Display abstract and index terms.
   if abstract != none [
-    #set text(9pt, weight: 700)
+    #set text(9pt, weight: 700, spacing: 150%)
     #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
 
     #if index-terms != () [
