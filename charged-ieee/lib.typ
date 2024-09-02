@@ -47,6 +47,7 @@
 
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
   show figure.caption: set text(size: 8pt)
+  show figure.caption.where(kind: image): set align(left)
 
   // Code blocks
   show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)
