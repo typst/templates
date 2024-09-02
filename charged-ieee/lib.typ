@@ -31,7 +31,9 @@
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
-  set text(font: "TeX Gyre Termes", size: 10pt, spacing: 125%)
+  // As of 2024-08, the IEEE LaTeX template uses wider interword spacing
+  // - See e.g. the definition \def\@IEEEinterspaceratioM{0.35} in IEEEtran.cls
+  set text(font: "TeX Gyre Termes", size: 10pt, spacing: .35em)
 
   // Enums numbering
   set enum(numbering: "1)a)i)")
@@ -140,7 +142,7 @@
 
   // Display the paper's title.
   v(3pt, weak: true)
-  align(center, par(leading: 0.5em, text(size: 24pt, weight: 500, spacing: 125%, title)))
+  align(center, par(leading: 0.5em, text(size: 24pt, title)))
   v(8.35mm, weak: true)
 
   // Display the authors list.
