@@ -40,14 +40,19 @@
 
   // Tables & figures
   set figure(placement: top)
+  show figure.caption: set align(left)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 8pt)
-  show figure.caption.where(kind: table): smallcaps
-  show figure.where(kind: table): set figure(numbering: "I")
-
+  show figure.where(kind: table): set figure(supplement: [TABLE], numbering: "I")
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
-  show figure.caption: set text(size: 8pt)
-  show figure.caption.where(kind: image): set align(left)
+
+  // Caption vs. reference:  supplement "TABLE" -> "Table", "Fig." -> "Figure"
+  set ref(supplement: it => {
+    if it.supplement == [TABLE] [Table]
+    else if it.supplement == [Fig.] [Figure]
+    else [ it.supplement ]
+  })
+
 
   // Code blocks
   show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)
@@ -137,7 +142,7 @@
   })
 
   // Style bibliography.
-  show std-bibliography: set text(size: 8pt)
+  show std-bibliography: set text(8pt)
   show std-bibliography: set block(spacing: 0.5em)
   set std-bibliography(title: text(10pt)[References], style: "ieee")
 
