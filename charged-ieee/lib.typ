@@ -50,7 +50,7 @@
   set ref(supplement: it => {
     if it.supplement == [TABLE] [Table]
     else if it.supplement == [Fig.] [Figure]
-    else [ it.supplement ]
+    else [#it.supplement]
   })
 
 
