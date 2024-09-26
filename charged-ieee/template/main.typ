@@ -23,6 +23,7 @@
   ),
   index-terms: ("Scientific writing", "Typesetting", "Document creation", "Syntax"),
   bibliography: bibliography("refs.bib"),
+  figure-text-reference: [Fig.],
 )
 
 = Introduction
@@ -37,9 +38,48 @@ To demonstrate the potential of Typst, we conducted a series of experiments comp
 
 Overall, we believe that Typst represents a significant step forward in the field of scientific writing and typesetting, providing researchers with a valuable tool to streamline their workflow and focus on what really matters: their research. In the following sections, we will introduce Typst in more detail and provide evidence for its superiority over other typesetting systems in a variety of scenarios.
 
-= Methods
+= Methods <sec:methods>
 #lorem(45)
 
-$ a + b = gamma $
+$ a + b = gamma $<formula>
 
-#lorem(200)
+#lorem(80)
+
+#figure(
+  placement: none,
+  image("sun.svg", width: 21%),
+  caption: [An illustration of the Sun. Note that this illustration is not to scale.] // Centered under the image
+)<fig:sun>
+
+In @fig:sun you can see the Sun, which is a star that is located at the center of the solar system.
+
+#lorem(80)
+
+#figure(
+  caption: [The Planets of the Solar System and Their Average Distance from the Sun],
+  placement: none,
+  table(
+    columns: (auto, auto),
+    align: (col, row) => (left, right).at(col),
+    inset: (x:12pt, y:4pt),
+    stroke: none,
+    fill: (x, y) => if y > 0 and calc.rem(y, 2) == 0  { rgb("#efefef") },
+    table.header(
+      [Planet], [Distance (million km)]
+    ),
+    table.hline(stroke:.5pt),
+    [Mercury], [57.9],
+    [Venus], [108.2],
+    [Earth], [149.6],
+    [Mars], [227.9],
+    [Jupiter], [778.6],
+    [Saturn], [1,433.5],
+    [Uranus], [2,872.5],
+    [Neptune], [4,495.1],
+    table.hline(stroke:.5pt),
+  )
+) <tab:planets>
+
+In @tab:planets, you see the planents of the solar system and their average distance from the Sun.
+It was calculated with the formula in @formula that we presented in @sec:methods.
+

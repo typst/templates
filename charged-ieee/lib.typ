@@ -24,6 +24,10 @@
   // The result of a call to the `bibliography` function or `none`.
   bibliography: none,
 
+  // How figures are referred to from within the text
+  // Use "Figure" instead of "Fig." for computer-related publications
+  figure-text-reference: [Fig.],
+
   // The paper's content.
   body
 ) = {
@@ -42,17 +46,15 @@
   set figure(placement: top)
   show figure.caption: set align(left)
   show figure.where(kind: table): set figure.caption(position: top)
-  show figure.where(kind: table): set text(size: 8pt)
   show figure.where(kind: table): set figure(supplement: [TABLE], numbering: "I")
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
 
   // Caption vs. reference:  supplement "TABLE" -> "Table", "Fig." -> "Figure"
   set ref(supplement: it => {
     if it.supplement == [TABLE] [Table]
-    else if it.supplement == [Fig.] [Figure]
+    else if it.supplement == [Fig.] [#figure-text-reference]
     else [#it.supplement]
   })
-
 
   // Code blocks
   show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)
