@@ -49,7 +49,7 @@
   show figure.where(kind: table): set figure(supplement: [TABLE], numbering: "I")
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
 
-  // Caption vs. reference:  supplement "TABLE" -> "Table", "Fig." -> "Figure"
+  // Caption vs. reference: E.g. supplement "TABLE" -> "Table"
   set ref(supplement: it => {
     if it.supplement == [TABLE] [Table]
     else if it.supplement == [Fig.] [#figure-text-reference]
