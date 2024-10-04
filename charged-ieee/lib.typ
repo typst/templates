@@ -1,6 +1,3 @@
-// Workaround for the lack of an `std` scope.
-#let std-bibliography = bibliography
-
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let ieee(
@@ -68,8 +65,10 @@
   // Code blocks
   show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)
 
-  // Configure the page.
+  // Configure the page and multi-column properties.
+  set columns(gutter: 12pt)
   set page(
+    columns: 2,
     paper: paper-size,
     // The margins depend on the paper size.
     margin: if paper-size == "a4" {
@@ -107,9 +106,9 @@
 
   // Configure headings.
   set heading(numbering: "I.A.a)")
-  show heading: it => locate(loc => {
+  show heading: it => {
     // Find out the final number of the heading counter.
-    let levels = counter(heading).at(loc)
+    let levels = counter(heading).get()
     let deepest = if levels != () {
       levels.last()
     } else {
@@ -119,7 +118,7 @@
     set text(10pt, weight: 400)
     if it.level == 1 [
       // First-level headings are centered smallcaps.
-      // We don't want to number of the acknowledgment section.
+      // We don't want to number the acknowledgment section.
       #let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
       #set align(center)
       #set text(if is-ack { 10pt } else { 11pt })
@@ -150,58 +149,65 @@
       }
       _#(it.body):_
     ]
-  })
+  }
 
   // Style bibliography.
-  show std-bibliography: set text(8pt)
-  show std-bibliography: set block(spacing: 0.5em)
-  set std-bibliography(title: text(10pt)[References], style: "ieee")
+  show std.bibliography: set text(8pt)
+  show std.bibliography: set block(spacing: 0.5em)
+  set std.bibliography(title: text(10pt)[References], style: "ieee")
 
-  // Display the paper's title.
-  v(3pt, weak: true)
-  align(center, par(leading: 0.5em, text(size: 24pt, title)))
-  v(8.35mm, weak: true)
+  // Display the paper's title and authors at the top of the page,
+  // spanning all columns (hence floating at the scope of the
+  // columns' parent, which is the page).
+  place(
+    top,
+    float: true,
+    scope: "parent",
+    clearance: 30pt,
+    {
+      v(3pt, weak: true)
+      align(center, par(leading: 0.5em, text(size: 24pt, title)))
+      v(8.35mm, weak: true)
 
-  // Display the authors list.
-  set par(leading: 0.6em)
-  for i in range(calc.ceil(authors.len() / 3)) {
-    let end = calc.min((i + 1) * 3, authors.len())
-    let is-last = authors.len() == end
-    let slice = authors.slice(i * 3, end)
-    grid(
-      columns: slice.len() * (1fr,),
-      gutter: 12pt,
-      ..slice.map(author => align(center, {
-        text(size: 11pt, author.name)
-        if "department" in author [
-          \ #emph(author.department)
-        ]
-        if "organization" in author [
-          \ #emph(author.organization)
-        ]
-        if "location" in author [
-          \ #author.location
-        ]
-        if "email" in author {
-          if type(author.email) == str [
-            \ #link("mailto:" + author.email)
-          ] else [
-            \ #author.email
-          ]
+      // Display the authors list.
+      set par(leading: 0.6em)
+      for i in range(calc.ceil(authors.len() / 3)) {
+        let end = calc.min((i + 1) * 3, authors.len())
+        let is-last = authors.len() == end
+        let slice = authors.slice(i * 3, end)
+        grid(
+          columns: slice.len() * (1fr,),
+          gutter: 12pt,
+          ..slice.map(author => align(center, {
+            text(size: 11pt, author.name)
+            if "department" in author [
+              \ #emph(author.department)
+            ]
+            if "organization" in author [
+              \ #emph(author.organization)
+            ]
+            if "location" in author [
+              \ #author.location
+            ]
+            if "email" in author {
+              if type(author.email) == str [
+                \ #link("mailto:" + author.email)
+              ] else [
+                \ #author.email
+              ]
+            }
+          }))
+        )
+
+        if not is-last {
+          v(16pt, weak: true)
         }
-      }))
-    )
-
-    if not is-last {
-      v(16pt, weak: true)
+      }
     }
-  }
-  v(30pt, weak: true)
+  )
 
-  // Start two column mode and configure paragraph properties.
-  show: columns.with(2, gutter: 12pt)
-  set par(justify: true, first-line-indent: 1em, leading: 0.45em)
-  show par: set block(spacing: 0.45em)
+  // Configure paragraph properties.
+  set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.45em)
 
   // Display abstract and index terms.
   if abstract != none [
