@@ -63,15 +63,19 @@
 
     // Display caption.
     if it.has("caption") {
-      set align(center)
-      set text(font: "Syne")
-      v(if it.has("gap") { it.gap } else { 24pt }, weak: true)
-      [-- ]
-      it.caption
-      if it.numbering != none {
-        [ (] + counter(figure).display(it.numbering) + [)]
+      show figure.caption: caption => {
+        set align(center)
+        set text(font: "Syne")
+        [-- ]
+        caption.body
+        if caption.numbering != none {
+          [ (] + numbering(caption.numbering, ..counter(figure).at(it.location())) + [)]
+        }
+        [ --]
       }
-      [ --]
+
+      v(if it.has("gap") { it.gap } else { 24pt }, weak: true)
+      it.caption
     }
 
     v(48pt, weak: true)
@@ -91,7 +95,7 @@
     text(fill: white, weight: "medium", 14pt, align(right + bottom, edition)),
 
     // Hero image.
-    style(styles => {
+    context {
       if hero-image == none {
         return
       }
@@ -103,8 +107,8 @@
         hero-image.image
       }
       let text = text(size: 25pt, fill: white, font: "Syne Tactile", hero-image.caption)
-      let img-size = measure(img, styles)
-      let text-width = measure(text, styles).width + 12pt
+      let img-size = measure(img)
+      let text-width = measure(text).width + 12pt
       let line-length = img-size.height - text-width
 
       grid(
@@ -122,7 +126,7 @@
           line(angle: 90deg, length: line-length, stroke: 3pt + white),
         ),
       )
-    }),
+    },
 
     // Nothing next to the hero image.
     none,
@@ -160,15 +164,15 @@
     },
 
     // The sidebar with articles.
-    locate(loc => {
+    context {
       set text(fill: white, weight: 500)
       show heading: underline.with(stroke: 2pt, offset: 4pt)
       v(44pt)
-      for element in articles.final(loc) {
+      for element in articles.final() {
         element
         v(24pt, weak: true)
       }
-    }),
+    },
   )
 }
 
