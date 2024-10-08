@@ -89,5 +89,9 @@ You can use tables like @solids.
 == Things that need to be done
 Prove theorems.
 
+#theorem[The Riemann hypothesis is true.]
+
+#proof[This is left as an exercise to the reader.]
+
 = Background
 #lorem(40)
