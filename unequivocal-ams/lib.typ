@@ -136,42 +136,33 @@
   // Configure citation and bibliography styles.
   set std.bibliography(style: "springer-mathphys", title: [References])
 
-  show figure: it => block(above: 12.5pt, {
+  set figure(gap: 17pt)
+  show figure: set block(above: 12.5pt, below: 15pt)
+  show figure: it => {
     show: pad.with(x: 23pt)
-    set align(center)
 
-    // Display the figure's body.
-    it.body
-
-    // Display the figure's caption.
-    if it.has("caption") {
-      // Gap defaults to 17pt.
-      v(if it.has("gap") { it.gap } else { 17pt }, weak: true)
-
-      show figure.caption: caption => {
-        smallcaps(caption.supplement)
-        if caption.numbering != none {
-          [ ]
-          numbering(caption.numbering, ..caption.counter.at(it.location()))
-        }
-        [. ]
-        caption.body
+    // Customize the figure's caption.
+    show figure.caption: caption => {
+      smallcaps(caption.supplement)
+      if caption.numbering != none {
+        [ ]
+        numbering(caption.numbering, ..caption.counter.at(it.location()))
       }
-
-      it.caption
+      [. ]
+      caption.body
     }
 
-    v(15pt, weak: true)
-  })
+    // Display the figure's body and caption.
+    it
+  }
 
   // Theorems.
   show figure.where(kind: "theorem"): set align(start)
-  show figure.where(kind: "theorem"): it => block(above: 11.5pt, below: 11.5pt, {
+  show figure.where(kind: "theorem"): it => block(spacing: 11.5pt, {
     strong({
       it.supplement
       if it.numbering != none {
         [ ]
-        counter(heading).display()
         it.counter.display(it.numbering)
       }
       [.]
@@ -244,7 +235,7 @@
   body,
   kind: "theorem",
   supplement: [Theorem],
-  numbering: if numbered { "1" },
+  numbering: if numbered { n => counter(heading).display() + [#n] }
 )
 
 // And a function for a proof.
