@@ -64,20 +64,14 @@
 
   // Configure page properties.
   set page(
-    numbering: "1",
-
     // The header always contains the book title on odd pages and
-    // the chapter title on even pages, unless the page is one
-    // that starts a chapter (the chapter title is obvious then).
+    // the author on even pages, unless the page is one that
+    // starts a chapter (the chapter title is obvious then).
+    // These values can easily be change below.
     header: context {
-      // Are we on an odd page?
-      if calc.odd(counter(page).get().first()) {
-        return text(0.95em, smallcaps(title))
-      }
-
+      let i = here().page()
       // Are we on a page that starts a chapter? (We also check
       // the previous page because some headings contain pagebreaks.)
-      let i = here().page()
       let all = query(heading)
       if all.any(it => it.location().page() in (i - 1, i)) {
         return
@@ -86,7 +80,19 @@
       // Find the heading of the section we are currently in.
       let before = query(selector(heading).before(here()))
       if before != () {
-        align(right, text(0.95em, smallcaps(before.last().body)))
+        set text(0.95em)
+        let header = smallcaps(before.last().body)
+        let title = smallcaps(title)
+        let author = text(style: "italic", author)
+        grid(
+          columns: (auto, 1fr, auto),
+          align: (left, center, right),
+          if calc.even(i) [#i] else { hide([#i]) },
+          // Swap `author` and `title` around, or possibly with `heading`
+          // to change what is displayed on each side.
+          if calc.even(i) { author } else { title },
+          if calc.odd(i) [#i] else { hide([#i]) },
+        )
       }
     },
   )
