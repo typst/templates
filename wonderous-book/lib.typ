@@ -57,8 +57,7 @@
   pagebreak(to: "odd")
 
   // Configure paragraph properties.
-  set par(leading: 0.78em, first-line-indent: 12pt, justify: true)
-  show par: set block(spacing: 0.78em)
+  set par(spacing: 0.78em, leading: 0.78em, first-line-indent: 12pt, justify: true)
 
   // Start with a chapter outline.
   outline(title: [Chapters])
@@ -70,26 +69,26 @@
     // The header always contains the book title on odd pages and
     // the chapter title on even pages, unless the page is one
     // that starts a chapter (the chapter title is obvious then).
-    header: locate(loc => {
+    header: context {
       // Are we on an odd page?
-      let i = counter(page).at(loc).first()
-      if calc.odd(i) {
+      if calc.odd(counter(page).get().first()) {
         return text(0.95em, smallcaps(title))
       }
 
       // Are we on a page that starts a chapter? (We also check
       // the previous page because some headings contain pagebreaks.)
-      let all = query(heading, loc)
+      let i = here().page()
+      let all = query(heading)
       if all.any(it => it.location().page() in (i - 1, i)) {
         return
       }
 
       // Find the heading of the section we are currently in.
-      let before = query(selector(heading).before(loc), loc)
+      let before = query(selector(heading).before(here()))
       if before != () {
         align(right, text(0.95em, smallcaps(before.last().body)))
       }
-    }),
+    },
   )
 
   // Configure chapter headings.
