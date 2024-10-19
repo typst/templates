@@ -44,10 +44,14 @@
 
   // Tables & figures
   set figure(placement: top)
-  show figure.caption: set align(left)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set figure(supplement: [TABLE], numbering: "I")
   show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
+
+  show figure.caption: set text(size: 8pt)
+  show figure.caption: set align(start)
+  show figure.caption.where(kind: table): set align(center)
+  show figure.caption.where(kind: table): smallcaps
 
   // Caption vs. reference: E.g. supplement "TABLE" -> "Table"
   set ref(supplement: it => {
