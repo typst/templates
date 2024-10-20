@@ -24,9 +24,9 @@
   // The result of a call to the `bibliography` function or `none`.
   bibliography: none,
 
-  // How figures are referred to from within the text
-  // Use "Figure" instead of "Fig." for computer-related publications
-  figure-text-reference: [Fig.],
+  // How figures are referred to from within the text.
+  // Use "Figure" instead of "Fig." for computer-related publications.
+  figure-ref-supplement: [Fig.],
 
   // The paper's content.
   body
@@ -53,10 +53,10 @@
   show figure.caption.where(kind: table): set align(center)
   show figure.caption.where(kind: table): smallcaps
 
-  // Caption vs. reference: E.g. supplement "TABLE" -> "Table"
+  // Adapt reference based on caption, e.g. supplement "TABLE" -> "Table"
   set ref(supplement: it => {
     if it.supplement == [TABLE] [Table]
-    else if it.supplement == [Fig.] [#figure-text-reference]
+    else if it.supplement == [Fig.] [#figure-ref-supplement]
     else [#it.supplement]
   })
 
