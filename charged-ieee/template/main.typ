@@ -47,11 +47,11 @@ $ a + b = gamma $<formula>
 
 #figure(
   placement: none,
-  image("sun.svg", width: 21%),
-  caption: [An illustration of the Sun. Note that this illustration is not to scale.] // Centered under the image
+  circle(width: 21%),
+  caption: [A circle representing the Sun.] // Centered under the image
 )<fig:sun>
 
-In @fig:sun you can see the Sun, which is a star that is located at the center of the solar system.
+In @fig:sun you can see a common representation of the Sun, which is a star that is located at the center of the solar system.
 
 #lorem(80)
 
