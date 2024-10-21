@@ -23,7 +23,7 @@
   ),
   index-terms: ("Scientific writing", "Typesetting", "Document creation", "Syntax"),
   bibliography: bibliography("refs.bib"),
-  figure-text-reference: [Fig.],
+  figure-ref-supplement: [Fig.],
 )
 
 = Introduction
