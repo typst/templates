@@ -47,7 +47,7 @@ $ a + b = gamma $ <formula>
 
 #figure(
   placement: none,
-  circle(width: 21%),
+  circle(width: 20%),
   caption: [A circle representing the Sun.]
 ) <fig:sun>
 
