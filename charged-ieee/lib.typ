@@ -26,7 +26,7 @@
 
   // How figures are referred to from within the text.
   // Use "Figure" instead of "Fig." for computer-related publications.
-  figure-ref-supplement: [Fig.],
+  figure-supplement: [Fig.],
 
   // The paper's content.
   body
@@ -43,23 +43,27 @@
   set enum(numbering: "1)a)i)")
 
   // Tables & figures
-  set figure(placement: top)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 8pt)
-  show figure.where(kind: table): set figure(supplement: [TABLE], numbering: "I")
-  show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
-
+  show figure.where(kind: table): set figure(numbering: "I")
+  show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
   show figure.caption: set text(size: 8pt)
   show figure.caption: set align(start)
   show figure.caption.where(kind: table): set align(center)
-  show figure.caption.where(kind: table): smallcaps
 
-  // Adapt reference based on caption, e.g. supplement "TABLE" -> "Table"
-  set ref(supplement: it => {
-    if it.supplement == [TABLE] [Table]
-    else if it.supplement == [Fig.] [#figure-ref-supplement]
-    else [#it.supplement]
-  })
+  // Adapt supplement in caption independently from supplement used for
+  // references.
+  show figure: fig => {
+    let prefix = (
+      if fig.kind == table [TABLE]
+      else if fig.kind == image [Fig.]
+      else [#fig.supplement]
+    )
+    let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
+    show figure.caption: it => [#prefix~#numbers: #it.body]
+    show figure.caption.where(kind: table): smallcaps
+    fig
+  }
 
   // Code blocks
   show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)

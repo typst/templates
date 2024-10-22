@@ -23,7 +23,7 @@
   ),
   index-terms: ("Scientific writing", "Typesetting", "Document creation", "Syntax"),
   bibliography: bibliography("refs.bib"),
-  figure-ref-supplement: [Fig.],
+  figure-supplement: [Fig.],
 )
 
 = Introduction
@@ -41,7 +41,7 @@ Overall, we believe that Typst represents a significant step forward in the fiel
 = Methods <sec:methods>
 #lorem(45)
 
-$ a + b = gamma $ <formula>
+$ a + b = gamma $ <eq:gamma>
 
 #lorem(80)
 
@@ -53,21 +53,20 @@ $ a + b = gamma $ <formula>
 
 In @fig:sun you can see a common representation of the Sun, which is a star that is located at the center of the solar system.
 
-#lorem(80)
+#lorem(120)
 
 #figure(
   caption: [The Planets of the Solar System and Their Average Distance from the Sun],
-  placement: none,
   table(
-    columns: (auto, auto),
-    align: (col, row) => (left, right).at(col),
-    inset: (x:12pt, y:4pt),
-    stroke: none,
+    // Table styling is not mandated by the IEEE. Feel free to adjust these
+    // settings and potentially move them into a set rule.
+    columns: (6em, auto),
+    align: (left, right),
+    inset: (x: 8pt, y: 4pt),
+    stroke: (x, y) => if y <= 1 { (top: 0.5pt) },
     fill: (x, y) => if y > 0 and calc.rem(y, 2) == 0  { rgb("#efefef") },
-    table.header(
-      [Planet], [Distance (million km)]
-    ),
-    table.hline(stroke:.5pt),
+
+    table.header[Planet][Distance (million km)],
     [Mercury], [57.9],
     [Venus], [108.2],
     [Earth], [149.6],
@@ -76,10 +75,12 @@ In @fig:sun you can see a common representation of the Sun, which is a star that
     [Saturn], [1,433.5],
     [Uranus], [2,872.5],
     [Neptune], [4,495.1],
-    table.hline(stroke:.5pt),
   )
 ) <tab:planets>
 
 In @tab:planets, you see the planents of the solar system and their average distance from the Sun.
-It was calculated with the formula in @formula that we presented in @sec:methods.
+The distances were calculated with @eq:gamma that we presented in @sec:methods.
 
+#lorem(240)
+
+#lorem(240)
