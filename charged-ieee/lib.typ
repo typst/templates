@@ -24,6 +24,10 @@
   // The result of a call to the `bibliography` function or `none`.
   bibliography: none,
 
+  // How figures are referred to from within the text.
+  // Use "Figure" instead of "Fig." for computer-related publications.
+  figure-supplement: [Fig.],
+
   // The paper's content.
   body
 ) = {
@@ -31,20 +35,35 @@
   set document(title: title, author: authors.map(author => author.name))
 
   // Set the body font.
-  set text(font: "TeX Gyre Termes", size: 10pt)
+  // As of 2024-08, the IEEE LaTeX template uses wider interword spacing
+  // - See e.g. the definition \def\@IEEEinterspaceratioM{0.35} in IEEEtran.cls
+  set text(font: "TeX Gyre Termes", size: 10pt, spacing: .35em)
 
   // Enums numbering
   set enum(numbering: "1)a)i)")
 
   // Tables & figures
-  set figure(placement: top)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set text(size: 8pt)
-  show figure.caption.where(kind: table): smallcaps
   show figure.where(kind: table): set figure(numbering: "I")
-
-  show figure.where(kind: image): set figure(supplement: [Fig.], numbering: "1")
+  show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
   show figure.caption: set text(size: 8pt)
+  show figure.caption: set align(start)
+  show figure.caption.where(kind: table): set align(center)
+
+  // Adapt supplement in caption independently from supplement used for
+  // references.
+  show figure: fig => {
+    let prefix = (
+      if fig.kind == table [TABLE]
+      else if fig.kind == image [Fig.]
+      else [#fig.supplement]
+    )
+    let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
+    show figure.caption: it => [#prefix~#numbers: #it.body]
+    show figure.caption.where(kind: table): smallcaps
+    fig
+  }
 
   // Code blocks
   show raw: set text(font: "TeX Gyre Cursor", size: 1em / 0.8)
@@ -101,11 +120,11 @@
     if it.level == 1 [
       // First-level headings are centered smallcaps.
       // We don't want to number of the acknowledgment section.
-      #let is-ack = it.body in ([Acknowledgment], [Acknowledgement])
+      #let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
       #set align(center)
-      #set text(if is-ack { 10pt } else { 12pt })
+      #set text(if is-ack { 10pt } else { 11pt })
       #show: smallcaps
-      #v(20pt, weak: true)
+      #v(15pt, weak: true)
       #if it.numbering != none and not is-ack {
         numbering("I.", deepest)
         h(7pt, weak: true)
@@ -135,14 +154,16 @@
 
   // Style bibliography.
   show std-bibliography: set text(8pt)
+  show std-bibliography: set block(spacing: 0.5em)
   set std-bibliography(title: text(10pt)[References], style: "ieee")
 
   // Display the paper's title.
   v(3pt, weak: true)
-  align(center, text(24pt, title))
+  align(center, par(leading: 0.5em, text(size: 24pt, title)))
   v(8.35mm, weak: true)
 
   // Display the authors list.
+  set par(leading: 0.6em)
   for i in range(calc.ceil(authors.len() / 3)) {
     let end = calc.min((i + 1) * 3, authors.len())
     let is-last = authors.len() == end
@@ -151,7 +172,7 @@
       columns: slice.len() * (1fr,),
       gutter: 12pt,
       ..slice.map(author => align(center, {
-        text(12pt, author.name)
+        text(size: 11pt, author.name)
         if "department" in author [
           \ #emph(author.department)
         ]
@@ -175,25 +196,26 @@
       v(16pt, weak: true)
     }
   }
-  v(40pt, weak: true)
+  v(30pt, weak: true)
 
   // Start two column mode and configure paragraph properties.
   show: columns.with(2, gutter: 12pt)
-  set par(justify: true, first-line-indent: 1em)
-  show par: set block(spacing: 0.65em)
+  set par(justify: true, first-line-indent: 1em, leading: 0.45em)
+  show par: set block(spacing: 0.45em)
 
   // Display abstract and index terms.
   if abstract != none [
-    #set text(9pt, weight: 700)
+    #set text(9pt, weight: 700, spacing: 150%)
     #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
 
     #if index-terms != () [
-      #h(1em)_Index terms_---#h(weak: true, 0pt)#index-terms.join(", ")
+      #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
     ]
     #v(2pt)
   ]
 
   // Display the paper's contents.
+  set par(leading: 0.5em)
   body
 
   // Display bibliography.
