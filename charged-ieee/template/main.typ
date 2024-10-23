@@ -78,7 +78,7 @@ In @fig:sun you can see a common representation of the Sun, which is a star that
   )
 ) <tab:planets>
 
-In @tab:planets, you see the planents of the solar system and their average distance from the Sun.
+In @tab:planets, you see the planets of the solar system and their average distance from the Sun.
 The distances were calculated with @eq:gamma that we presented in @sec:methods.
 
 #lorem(240)
