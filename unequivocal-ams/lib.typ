@@ -241,7 +241,17 @@
 // And a function for a proof.
 #let proof(body) = block(spacing: 11.5pt, {
   emph[Proof.]
-  [ ] + body
+  [ ]
+  body
+
+  // Add a word-joiner with a 0pt box so the QED symbol is
+  // sent to the next line together with said box (that is,
+  // with nothing else) if it would otherwise collide with text.
+  box(width: 0pt)
   h(1fr)
-  box(scale(160%, origin: bottom + right, sym.square.stroked))
+  sym.wj
+  // Ensure line height isn't affected by our scaling by only
+  // reflowing when scaling the X axis (which is needed so the
+  // QED symbol is sent to the next line if it is too big).
+  box(scale(y: 160%, scale(x: 160%, reflow: true, origin: bottom + right, sym.square.stroked)))
 })

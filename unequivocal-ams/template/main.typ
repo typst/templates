@@ -93,7 +93,7 @@ Prove theorems, such as @thm.
 
 #theorem[The Riemann hypothesis is true.] <thm>
 
-#proof[This is left as an exercise to the reader.]
+#proof[This is left as an exercise to the reader, given the complexity of the theorem.]
 
 = Background
 #lorem(40)
