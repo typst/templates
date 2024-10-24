@@ -47,7 +47,7 @@ $ a + b = gamma $ <eq:gamma>
 
 #figure(
   placement: none,
-  circle(width: 20%),
+  circle(radius: 15pt),
   caption: [A circle representing the Sun.]
 ) <fig:sun>
 
@@ -57,6 +57,7 @@ In @fig:sun you can see a common representation of the Sun, which is a star that
 
 #figure(
   caption: [The Planets of the Solar System and Their Average Distance from the Sun],
+  placement: top,
   table(
     // Table styling is not mandated by the IEEE. Feel free to adjust these
     // settings and potentially move them into a set rule.
@@ -78,7 +79,7 @@ In @fig:sun you can see a common representation of the Sun, which is a star that
   )
 ) <tab:planets>
 
-In @tab:planets, you see the planents of the solar system and their average distance from the Sun.
+In @tab:planets, you see the planets of the solar system and their average distance from the Sun.
 The distances were calculated with @eq:gamma that we presented in @sec:methods.
 
 #lorem(240)
