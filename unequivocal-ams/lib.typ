@@ -198,12 +198,14 @@
   // Display the bibliography, if any is given.
   if bibliography != none {
     show std.bibliography: set text(footnote-size)
-    show std.bibliography: block.with(above: 11pt, inset: (x: 0.5pt))
+    show std.bibliography: set block(above: 11pt)
+    show std.bibliography: pad.with(x: 0.5pt)
     bibliography
   }
 
   // Display details about the authors at the end.
-  show: block.with(above: 12pt, inset: (x: 11.5pt))
+  v(12pt, weak: true)
+  show: pad.with(x: 11.5pt)
   set par(first-line-indent: 0pt)
   set text(script-size)
 
@@ -253,5 +255,11 @@
   // Ensure line height isn't affected by our scaling by only
   // reflowing when scaling the X axis (which is needed so the
   // QED symbol is sent to the next line if it is too big).
-  box(scale(y: 160%, scale(x: 160%, reflow: true, origin: bottom + right, sym.square.stroked)))
+  box(
+    scale(
+      y: 160%,
+      origin: bottom + right,
+      scale(x: 160%, reflow: true, origin: bottom + right, sym.square.stroked)
+    )
+  )
 })
