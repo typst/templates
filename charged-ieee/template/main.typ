@@ -57,6 +57,7 @@ In @fig:sun you can see a common representation of the Sun, which is a star that
 
 #figure(
   caption: [The Planets of the Solar System and Their Average Distance from the Sun],
+  placement: top,
   table(
     // Table styling is not mandated by the IEEE. Feel free to adjust these
     // settings and potentially move them into a set rule.
