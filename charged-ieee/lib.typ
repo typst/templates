@@ -118,32 +118,30 @@
     }
 
     set text(10pt, weight: 400)
-    if it.level == 1 [
+    if it.level == 1 {
       // First-level headings are centered smallcaps.
       // We don't want to number the acknowledgment section.
-      #let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
-      #set align(center)
-      #set text(if is-ack { 10pt } else { 11pt })
-      #show: smallcaps
-      #v(15pt, weak: true)
-      #if it.numbering != none and not is-ack {
+      let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
+      set align(center)
+      set text(if is-ack { 10pt } else { 11pt })
+      show: block.with(above: 15pt, below: 13.75pt, sticky: true)
+      show: smallcaps
+      if it.numbering != none and not is-ack {
         numbering("I.", deepest)
         h(7pt, weak: true)
       }
-      #it.body
-      #v(13.75pt, weak: true)
-    ] else if it.level == 2 [
+      it.body
+    } else if it.level == 2 {
       // Second-level headings are run-ins.
-      #set par(first-line-indent: 0pt)
-      #set text(style: "italic")
-      #v(10pt, weak: true)
-      #if it.numbering != none {
+      set par(first-line-indent: 0pt)
+      set text(style: "italic")
+      show: block.with(spacing: 10pt, sticky: true)
+      if it.numbering != none {
         numbering("A.", deepest)
         h(7pt, weak: true)
       }
-      #it.body
-      #v(10pt, weak: true)
-    ] else [
+      it.body
+    } else [
       // Third level headings are run-ins too, but different.
       #if it.level == 3 {
         numbering("a)", deepest)
