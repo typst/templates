@@ -73,7 +73,9 @@ You can use tables like @solids.
     columns: (1fr, auto, auto),
     inset: 5pt,
     align: horizon,
-    [], [*Area*], [*Parameters*],
+    table.header(
+      [], [*Area*], [*Parameters*]
+    ),
     [*Cylinder*],
     $ pi h (D^2 - d^2) / 4 $,
     [$h$: height \
@@ -87,7 +89,11 @@ You can use tables like @solids.
 ) <solids>
 
 == Things that need to be done
-Prove theorems.
+Prove theorems, such as @thm.
+
+#theorem[The Riemann hypothesis is true.] <thm>
+
+#proof[This is left as an exercise to the reader, given the complexity of the theorem.]
 
 = Background
 #lorem(40)

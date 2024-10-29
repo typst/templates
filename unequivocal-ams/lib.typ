@@ -5,9 +5,6 @@
 #let normal-size = 10.00002pt
 #let large-size = 11.74988pt
 
-// Workaround for the lack of an `std` scope.
-#let std-bibliography = bibliography
-
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the American Mathematical Society.
 #let ams-article(
@@ -70,28 +67,29 @@
     // authors, except on the first page. The page number is on
     // the left for even pages and on the right for odd pages.
     header-ascent: 14pt,
-    header: locate(loc => {
-      let i = counter(page).at(loc).first()
+    header: context {
+      let i = counter(page).get().first()
       if i == 1 { return }
       set text(size: script-size)
       grid(
         columns: (6em, 1fr, 6em),
+        align: (start, center, end),
         if calc.even(i) [#i],
-        align(center, upper(
+        upper(
           if calc.odd(i) { title } else { author-string }
-        )),
-        if calc.odd(i) { align(right)[#i] }
+        ),
+        if calc.odd(i) { [#i] }
       )
-    }),
+    },
 
     // On the first page, the footer should contain the page number.
     footer-descent: 12pt,
-    footer: locate(loc => {
-      let i = counter(page).at(loc).first()
+    footer: context {
+      let i = counter(page).get().first()
       if i == 1 {
         align(center, text(size: script-size, [#i]))
       }
-    })
+    }
   )
 
   // Configure headings.
@@ -136,44 +134,40 @@
   show math.equation: set text(weight: 400)
 
   // Configure citation and bibliography styles.
-  set std-bibliography(style: "springer-mathphys", title: [References])
+  set std.bibliography(style: "springer-mathphys", title: [References])
 
+  set figure(gap: 17pt)
+  show figure: set block(above: 12.5pt, below: 15pt)
   show figure: it => {
     show: pad.with(x: 23pt)
-    set align(center)
 
-    v(12.5pt, weak: true)
-
-    // Display the figure's body.
-    it.body
-
-    // Display the figure's caption.
-    if it.has("caption") {
-      // Gap defaults to 17pt.
-      v(if it.has("gap") { it.gap } else { 17pt }, weak: true)
-      smallcaps(it.supplement)
-      if it.numbering != none {
+    // Customize the figure's caption.
+    show figure.caption: caption => {
+      smallcaps(caption.supplement)
+      if caption.numbering != none {
         [ ]
-        it.counter.display(it.numbering)
+        numbering(caption.numbering, ..caption.counter.at(it.location()))
       }
       [. ]
-      it.caption.body
+      caption.body
     }
 
-    v(15pt, weak: true)
+    // Display the figure's body and caption.
+    it
   }
 
   // Theorems.
-  show figure.where(kind: "theorem"): it => block(above: 11.5pt, below: 11.5pt, {
+  show figure.where(kind: "theorem"): set align(start)
+  show figure.where(kind: "theorem"): it => block(spacing: 11.5pt, {
     strong({
       it.supplement
       if it.numbering != none {
         [ ]
-        counter(heading).display()
         it.counter.display(it.numbering)
       }
       [.]
     })
+    [ ]
     emph(it.body)
   })
 
@@ -186,8 +180,7 @@
   }))
 
   // Configure paragraph properties.
-  set par(first-line-indent: 1.2em, justify: true, leading: 0.58em)
-  show par: set block(spacing: 0.58em)
+  set par(spacing: 0.58em, first-line-indent: 1.2em, justify: true, leading: 0.58em)
 
   // Display the abstract
   if abstract != none {
@@ -204,12 +197,14 @@
 
   // Display the bibliography, if any is given.
   if bibliography != none {
-    show std-bibliography: set text(footnote-size)
-    show std-bibliography: pad.with(x: 0.5pt)
+    show std.bibliography: set text(footnote-size)
+    show std.bibliography: set block(above: 11pt)
+    show std.bibliography: pad.with(x: 0.5pt)
     bibliography
   }
 
-  // The thing ends with details about the authors.
+  // Display details about the authors at the end.
+  v(12pt, weak: true)
   show: pad.with(x: 11.5pt)
   set par(first-line-indent: 0pt)
   set text(script-size)
@@ -242,13 +237,29 @@
   body,
   kind: "theorem",
   supplement: [Theorem],
-  numbering: if numbered { "1" },
+  numbering: if numbered { n => counter(heading).display() + [#n] }
 )
 
 // And a function for a proof.
 #let proof(body) = block(spacing: 11.5pt, {
   emph[Proof.]
-  [ ] + body
+  [ ]
+  body
+
+  // Add a word-joiner with a 0pt box so the QED symbol is
+  // sent to the next line together with said box (that is,
+  // with nothing else) if it would otherwise collide with text.
+  box(width: 0pt)
   h(1fr)
-  box(scale(160%, origin: bottom + right, sym.square.stroked))
+  sym.wj
+  // Ensure line height isn't affected by our scaling by only
+  // reflowing when scaling the X axis (which is needed so the
+  // QED symbol is sent to the next line if it is too big).
+  box(
+    scale(
+      y: 160%,
+      origin: bottom + right,
+      scale(x: 160%, reflow: true, origin: bottom + right, sym.square.stroked)
+    )
+  )
 })
