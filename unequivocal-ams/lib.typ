@@ -246,21 +246,15 @@
   emph[Proof.]
   [ ]
   body
-
-  // Add a word-joiner with a 0pt box so the QED symbol is
-  // sent to the next line together with said box (that is,
-  // with nothing else) if it would otherwise collide with text.
-  box(width: 0pt)
   h(1fr)
+
+  // Add a word-joiner so that the proof square and the last word before the
+  // 1fr spacing are kept together.
   sym.wj
-  // Ensure line height isn't affected by our scaling by only
-  // reflowing when scaling the X axis (which is needed so the
-  // QED symbol is sent to the next line if it is too big).
-  box(
-    scale(
-      y: 160%,
-      origin: bottom + right,
-      scale(x: 160%, reflow: true, origin: bottom + right, sym.square.stroked)
-    )
-  )
+
+  // Add a non-breaking space to ensure a minimum amount of space between the
+  // text and the proof square.
+  sym.space.nobreak
+
+  $square.stroked$
 })
