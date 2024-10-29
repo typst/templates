@@ -139,8 +139,6 @@
   set figure(gap: 17pt)
   show figure: set block(above: 12.5pt, below: 15pt)
   show figure: it => {
-    show: pad.with(x: 23pt)
-
     // Customize the figure's caption.
     show figure.caption: caption => {
       smallcaps(caption.supplement)
@@ -151,6 +149,9 @@
       [. ]
       caption.body
     }
+
+    // We want a bit of space around tables and images.
+    show selector.or(table, image): pad.with(x: 23pt)
 
     // Display the figure's body and caption.
     it
