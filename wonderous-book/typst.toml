@@ -1,6 +1,6 @@
 [package]
 name = "wonderous-book"
-version = "0.1.0"
+version = "0.1.1"
 compiler = "0.12.0"
 entrypoint = "lib.typ"
 repository = "https://github.com/typst/templates"

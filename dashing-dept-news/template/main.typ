@@ -1,4 +1,4 @@
-#import "@preview/dashing-dept-news:0.1.0": newsletter, article
+#import "@preview/dashing-dept-news:0.1.1": newsletter, article
 
 #show: newsletter.with(
   title: [Chemistry Department],

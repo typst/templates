@@ -1,6 +1,6 @@
 [package]
 name = "dashing-dept-news"
-version = "0.1.0"
+version = "0.1.1"
 compiler = "0.11.0"
 entrypoint = "lib.typ"
 repository = "https://github.com/typst/templates"

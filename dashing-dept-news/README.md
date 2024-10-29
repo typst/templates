@@ -35,7 +35,7 @@ function in a show rule. If you, however, want to change an existing project to
 use this template, you can add a show rule like this at the top of your file:
 
 ```typ
-#import "@preview/dashing-dept-news:0.1.0": newsletter, article
+#import "@preview/dashing-dept-news:0.1.1": newsletter, article
 #show: newsletter.with(
   title: [Chemistry Department],
   edition: [
