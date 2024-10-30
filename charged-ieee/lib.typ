@@ -58,7 +58,7 @@
       else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
-    show figure.caption: it => [#prefix~#numbers: #it.body]
+    show figure.caption: it => [#prefix~#numbers. #it.body]
     show figure.caption.where(kind: table): smallcaps
     fig
   }
