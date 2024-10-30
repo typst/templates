@@ -31,6 +31,8 @@ This template exports the `ieee` function with the following named arguments:
   change the page format.
 - `bibliography`: The result of a call to the `bibliography` function or `none`.
   Specifying this will configure numeric, IEEE-style citations.
+- `figure-supplement`: How figures are referred to from within the text. Use
+  `"Figure"` instead of `"Fig."` for computer-related publications.
 
 The function also accepts a single, positional argument for the body of the
 paper.
