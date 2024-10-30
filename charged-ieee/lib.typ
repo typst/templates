@@ -47,8 +47,7 @@
   show figure.where(kind: table): set figure(numbering: "I")
   show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
   show figure.caption: set text(size: 8pt)
-  show figure.caption: set align(start)
-  show figure.caption.where(kind: table): set align(center)
+
 
   // Adapt supplement in caption independently from supplement used for
   // references.
