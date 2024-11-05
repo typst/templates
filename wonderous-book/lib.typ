@@ -85,13 +85,13 @@
         let title = smallcaps(title)
         let author = text(style: "italic", author)
         grid(
-          columns: (auto, 1fr, auto),
+          columns: (1fr, 10fr, 1fr),
           align: (left, center, right),
-          if calc.even(i) [#i] else { hide([#i]) },
+          if calc.even(i) [#i],
           // Swap `author` and `title` around, or possibly with `heading`
           // to change what is displayed on each side.
           if calc.even(i) { author } else { title },
-          if calc.odd(i) [#i] else { hide([#i]) },
+          if calc.odd(i) [#i],
         )
       }
     },
