@@ -20,6 +20,25 @@
   // The book's content.
   body,
 ) = {
+  // Creates a pagebreak to the given parity where empty pages
+  // can be detected via `is-page-empty`.
+  let detectable-pagebreak(to: "odd") = {
+    [#metadata(none) <empty-page-start>]
+    pagebreak(to: to)
+    [#metadata(none) <empty-page-end>]
+  }
+
+  // Workaround for https://github.com/typst/typst/issues/2722
+  let is-page-empty() = {
+    let page-num = here().page()
+    query(<empty-page-start>)
+      .zip(query(<empty-page-end>))
+      .any(((start, end)) => {
+        (start.location().page() < page-num
+          and page-num < end.location().page())
+      })
+  }
+
   // Set the document's metadata.
   set document(title: title, author: author)
 
@@ -61,32 +80,42 @@
 
   // Start with a chapter outline.
   outline(title: [Chapters])
+  pagebreak(to: "odd", weak: true)
 
   // Configure page properties.
   set page(
-    numbering: "1",
-
     // The header always contains the book title on odd pages and
-    // the chapter title on even pages, unless the page is one
-    // that starts a chapter (the chapter title is obvious then).
+    // the author on even pages, unless
+    // - we are on an empty page
+    // - we are on a page that starts a chapter
     header: context {
-      // Are we on an odd page?
-      if calc.odd(counter(page).get().first()) {
-        return text(0.95em, smallcaps(title))
+      // Is this an empty page inserted to keep page parity?
+      if is-page-empty() {
+        return
       }
 
-      // Are we on a page that starts a chapter? (We also check
-      // the previous page because some headings contain pagebreaks.)
+      // Are we on a page that starts a chapter?
       let i = here().page()
-      let all = query(heading)
-      if all.any(it => it.location().page() in (i - 1, i)) {
+      if query(heading).any(it => it.location().page() == i) {
         return
       }
 
       // Find the heading of the section we are currently in.
       let before = query(selector(heading).before(here()))
       if before != () {
-        align(right, text(0.95em, smallcaps(before.last().body)))
+        set text(0.95em)
+        let header = smallcaps(before.last().body)
+        let title = smallcaps(title)
+        let author = text(style: "italic", author)
+        grid(
+          columns: (1fr, 10fr, 1fr),
+          align: (left, center, right),
+          if calc.even(i) [#i],
+          // Swap `author` and `title` around, or possibly with `heading`
+          // to change what is displayed on each side.
+          if calc.even(i) { author } else { title },
+          if calc.odd(i) [#i],
+        )
       }
     },
   )
@@ -94,7 +123,7 @@
   // Configure chapter headings.
   show heading.where(level: 1): it => {
     // Always start on odd pages.
-    pagebreak(to: "odd")
+    detectable-pagebreak(to: "odd")
 
     // Create the heading numbering.
     let number = if it.numbering != none {
