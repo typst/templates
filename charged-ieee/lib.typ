@@ -219,9 +219,12 @@
     #set text(9pt, weight: 700, spacing: 150%)
     #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
 
-    #if index-terms != () [
+    #if type(index-terms) == str [
+      #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms
+    ] else if index-terms != () [
       #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
     ]
+
     #v(2pt)
   ]
 
