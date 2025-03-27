@@ -42,7 +42,7 @@
   // Tables & figures
   show figure: set block(spacing: 15.5pt)
   show figure: set place(clearance: 15.5pt)
-  show figure.where(kind: table): set figure.caption(position: top)
+  show figure.where(kind: table): set figure.caption(position: top, separator: [\ ])
   show figure.where(kind: table): set text(size: 8pt)
   show figure.where(kind: table): set figure(numbering: "I")
   show figure.where(kind: image): set figure(supplement: figure-supplement, numbering: "1")
@@ -52,6 +52,7 @@
 
   // Adapt supplement in caption independently from supplement used for
   // references.
+  set figure.caption(separator: [. ])
   show figure: fig => {
     let prefix = (
       if fig.kind == table [TABLE]
@@ -59,7 +60,7 @@
       else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
-    show figure.caption: it => [#prefix~#numbers: #it.body]
+    show figure.caption: it => [#prefix~#numbers#it.separator#it.body]
     show figure.caption.where(kind: table): smallcaps
     fig
   }
