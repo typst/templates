@@ -1,8 +1,12 @@
+// import locale vars
+#import "locale.typ": *
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let ieee(
   // The paper's title.
   title: [Paper Title],
+
+  language: "en", //de
 
   // An array of authors. For each author you can specify a name,
   // department, organization, location, and email. Everything but
@@ -160,7 +164,7 @@
   // Style bibliography.
   show std.bibliography: set text(8pt)
   show std.bibliography: set block(spacing: 0.5em)
-  set std.bibliography(title: text(10pt)[References], style: "ieee")
+  set std.bibliography(title: text(10pt)[#REFERENCES.at(language)], style: "ieee")
 
   // Display the paper's title and authors at the top of the page,
   // spanning all columns (hence floating at the scope of the
@@ -217,8 +221,8 @@
 
   // Display abstract and index terms.
   if abstract != none [
-    #set text(9pt, weight: 700, spacing: 150%)
-    #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
+    #set text(9pt, weight: 700, spacing: 150%, language: language)
+    #h(1em) #emph(ABSTRACT.at(language))---#h(weak: true, 0pt)#abstract
 
     #if index-terms != () [
       #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
