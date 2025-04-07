@@ -4,6 +4,8 @@
   // The paper's title.
   title: [Paper Title],
 
+  lang: "en",
+
   // An array of authors. For each author you can specify a name,
   // department, organization, location, and email. Everything but
   // but the name is optional.
