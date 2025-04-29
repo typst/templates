@@ -139,7 +139,6 @@
       it.body
     } else if it.level == 2 {
       // Second-level headings are run-ins.
-      set par(first-line-indent: 0pt)
       set text(style: "italic")
       show: block.with(spacing: 10pt, sticky: true)
       if it.numbering != none {
