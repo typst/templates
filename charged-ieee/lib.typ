@@ -211,22 +211,23 @@
     }
   )
 
-  // Configure paragraph properties.
-  set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.45em)
+  set par(justify: true, first-line-indent: 1em, spacing: 0.5em, leading: 0.5em)
 
   // Display abstract and index terms.
-  if abstract != none [
-    #set text(9pt, weight: 700, spacing: 150%)
-    #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
+  if abstract != none {
+    set par(spacing: 0.45em, leading: 0.45em, first-line-indent: (amount: 1em, all: true))
+    set text(9pt, weight: 700, spacing: 150%)
 
-    #if index-terms != () [
-      #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
-    ]
-    #v(2pt)
-  ]
+    [_Abstract_---#h(weak: true, 0pt)#abstract]
+
+    if index-terms != () {
+      parbreak()
+      [_Index Terms_---#h(weak: true, 0pt)#index-terms.join[, ]]
+    }
+    v(2pt)
+  }
 
   // Display the paper's contents.
-  set par(leading: 0.5em)
   body
 
   // Display bibliography.
