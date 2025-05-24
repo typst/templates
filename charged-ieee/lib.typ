@@ -172,7 +172,11 @@
     clearance: 30pt,
     {
       v(3pt, weak: true)
-      align(center, par(leading: 1.2em, text(size: 24pt, title)))
+      align(center, block({
+        set par(leading: 0.5em)
+        set text(size: 24pt)
+        title
+      }))
       v(8.35mm, weak: true)
 
       // Display the authors list.
