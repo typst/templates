@@ -60,7 +60,10 @@
       else [#fig.supplement]
     )
     let numbers = numbering(fig.numbering, ..fig.counter.at(fig.location()))
-    show figure.caption: it => [#prefix~#numbers#it.separator#it.body]
+    // Wrap figure captions in block to prevent the creation of paragraphs. In
+    // particular, this means `par.first-line-indent` does not apply.
+    // See https://github.com/typst/templates/pull/73#discussion_r2112947947.
+    show figure.caption: it => block[#prefix~#numbers#it.separator#it.body]
     show figure.caption.where(kind: table): smallcaps
     fig
   }
@@ -139,7 +142,6 @@
       it.body
     } else if it.level == 2 {
       // Second-level headings are run-ins.
-      set par(first-line-indent: 0pt)
       set text(style: "italic")
       show: block.with(spacing: 10pt, sticky: true)
       if it.numbering != none {
@@ -171,9 +173,12 @@
     scope: "parent",
     clearance: 30pt,
     {
-      v(3pt, weak: true)
-      align(center, par(leading: 0.5em, text(size: 24pt, title)))
-      v(8.35mm, weak: true)
+      {
+        set align(center)
+        set par(leading: 0.5em)
+        set text(size: 24pt)
+        block(below: 8.35mm, title)
+      }
 
       // Display the authors list.
       set par(leading: 0.6em)
@@ -212,22 +217,23 @@
     }
   )
 
-  // Configure paragraph properties.
-  set par(spacing: 0.45em, justify: true, first-line-indent: 1em, leading: 0.45em)
+  set par(justify: true, first-line-indent: (amount: 1em, all: true), spacing: 0.5em, leading: 0.5em)
 
   // Display abstract and index terms.
-  if abstract != none [
-    #set text(9pt, weight: 700, spacing: 150%)
-    #h(1em) _Abstract_---#h(weak: true, 0pt)#abstract
+  if abstract != none {
+    set par(spacing: 0.45em, leading: 0.45em)
+    set text(9pt, weight: 700, spacing: 150%)
 
-    #if index-terms != () [
-      #h(.3em)_Index Terms_---#h(weak: true, 0pt)#index-terms.join(", ")
-    ]
-    #v(2pt)
-  ]
+    [_Abstract_---#h(weak: true, 0pt)#abstract]
+
+    if index-terms != () {
+      parbreak()
+      [_Index Terms_---#h(weak: true, 0pt)#index-terms.join[, ]]
+    }
+    v(2pt)
+  }
 
   // Display the paper's contents.
-  set par(leading: 0.5em)
   body
 
   // Display bibliography.
