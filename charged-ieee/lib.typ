@@ -221,7 +221,7 @@
 
   // Display abstract and index terms.
   if abstract != none {
-    set par(spacing: 0.45em, leading: 0.45em, first-line-indent: (amount: 1em, all: true))
+    set par(spacing: 0.45em, leading: 0.45em)
     set text(9pt, weight: 700, spacing: 150%)
 
     [_Abstract_---#h(weak: true, 0pt)#abstract]
