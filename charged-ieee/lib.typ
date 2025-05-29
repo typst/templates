@@ -171,13 +171,12 @@
     scope: "parent",
     clearance: 30pt,
     {
-      v(3pt, weak: true)
-      align(center, block({
+      {
+        set align(center)
         set par(leading: 0.5em)
         set text(size: 24pt)
-        title
-      }))
-      v(8.35mm, weak: true)
+        block(below: 8.35mm, title)
+      }
 
       // Display the authors list.
       set par(leading: 0.6em)
