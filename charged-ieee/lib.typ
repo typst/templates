@@ -1,3 +1,4 @@
+#import "@preview/scienceicons:0.1.0": orcid-icon
 // This function gets your whole document as its `body` and formats
 // it as an article in the style of the IEEE.
 #let ieee(
@@ -190,6 +191,10 @@
           gutter: 12pt,
           ..slice.map(author => align(center, {
             text(size: 11pt, author.name)
+            if "orcid" in author {
+              let orcid-green = rgb("#AECD54")
+              link("https://orcid.org/" + author.orcid, orcid-icon(color: orcid-green))
+            }
             if "department" in author [
               \ #emph(author.department)
             ]

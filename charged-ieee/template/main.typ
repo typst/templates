@@ -11,7 +11,8 @@
       department: [Co-Founder],
       organization: [Typst GmbH],
       location: [Berlin, Germany],
-      email: "haug@typst.app"
+      email: "haug@typst.app",
+      orcid: "0000-0000-0000-0000"
     ),
     (
       name: "Laurenz Mädje",
