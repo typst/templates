@@ -168,7 +168,7 @@
   // spanning all columns (hence floating at the scope of the
   // columns' parent, which is the page).
   place(
-    top,
+    top + center,
     float: true,
     scope: "parent",
     clearance: 30pt,
