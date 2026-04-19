@@ -31,6 +31,11 @@
   // Set document metadata.
   set document(title: title, author: authors.map(author => author.name))
 
+  assert(
+    paper-size in ("us-letter", "a4"),
+    message: "Invalid paper-size: '" + paper-size + "'. IEEE templates must use 'us-letter' or 'a4'."
+  )
+
   // Set the body font.
   // As of 2024-08, the IEEE LaTeX template uses wider interword spacing
   // - See e.g. the definition \def\@IEEEinterspaceratioM{0.35} in IEEEtran.cls
@@ -77,19 +82,16 @@
   )
 
   // Configure the page and multi-column properties.
-  set columns(gutter: 12pt)
+  set columns(gutter: 6.35mm)
   set page(
     columns: 2,
     paper: paper-size,
     // The margins depend on the paper size.
+    // https://www.ieee-ies.org/images/files/conferences/ieee-pages-and-margins-2016.pdf
     margin: if paper-size == "a4" {
-      (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
-    } else {
-      (
-        x: (50pt / 216mm) * 100%,
-        top: (55pt / 279mm) * 100%,
-        bottom: (64pt / 279mm) * 100%,
-      )
+      (x: 12.925mm, top: 19mm, bottom: 43mm)
+    } else if paper-size == "us-letter" {
+      (x: 15.875mm, top: 19mm, bottom: 25.4mm)
     }
   )
 
@@ -116,7 +118,7 @@
   set list(indent: 10pt, body-indent: 9pt)
 
   // Configure headings.
-  set heading(numbering: "I.A.a)")
+  set heading(numbering: "I.A.1)")
   show heading: it => {
     // Find out the final number of the heading counter.
     let levels = counter(heading).get()
@@ -152,7 +154,8 @@
     } else [
       // Third level headings are run-ins too, but different.
       #if it.level == 3 {
-        numbering("a)", deepest)
+        set text(style: "italic")
+        numbering("1)", deepest)
         [ ]
       }
       _#(it.body):_
