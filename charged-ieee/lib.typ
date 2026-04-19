@@ -116,7 +116,7 @@
   set list(indent: 10pt, body-indent: 9pt)
 
   // Configure headings.
-  set heading(numbering: "I.A.a)")
+  set heading(numbering: "I.A.1)")
   show heading: it => {
     // Find out the final number of the heading counter.
     let levels = counter(heading).get()
@@ -152,7 +152,8 @@
     } else [
       // Third level headings are run-ins too, but different.
       #if it.level == 3 {
-        numbering("a)", deepest)
+        set text(style: "italic")
+        numbering("1)", deepest)
         [ ]
       }
       _#(it.body):_
