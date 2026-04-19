@@ -1,4 +1,4 @@
-#import "@preview/charged-ieee:0.1.4": ieee
+#import "@preview/charged-ieee:0.1.5": ieee
 
 #show: ieee.with(
   title: [A Typesetting System to Untangle the Scientific Writing Process],
