@@ -21,6 +21,9 @@
   // The result of a call to the `bibliography` function or `none`.
   bibliography: none,
 
+  // The IEEE pubid
+  pubid: none,
+
   // How figures are referred to from within the text.
   // Use "Figure" instead of "Fig." for computer-related publications.
   figure-supplement: [Fig.],
@@ -230,6 +233,19 @@
       [_Index Terms_---#h(weak: true, 0pt)#index-terms.join[, ]]
     }
     v(2pt)
+  }
+
+  // if set, display the IEEE pubid. We place it at the bottom left of
+  // the first column
+  if pubid != none {
+    place(
+      bottom + left,
+      float: true,
+      box(
+        width: 100%,
+        align(left, text(8pt, pubid))
+      )
+    )
   }
 
   // Display the paper's contents.
