@@ -54,6 +54,9 @@
   // references.
   set figure.caption(separator: [. ])
   show figure: fig => {
+    if fig.numbering == none {
+      return fig
+    }
     let prefix = (
       if fig.kind == table [TABLE]
       else if fig.kind == image [Fig.]
