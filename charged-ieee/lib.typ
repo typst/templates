@@ -5,8 +5,8 @@
   title: [Paper Title],
 
   // An array of authors. For each author you can specify a name,
-  // department, organization, location, and email. Everything but
-  // but the name is optional.
+  // department, organization, location, email, and orcid. Everything but
+  // the name is optional.
   authors: (),
 
   // The paper's abstract. Can be omitted if you don't have one.
@@ -204,6 +204,13 @@
                 \ #link("mailto:" + author.email)
               ] else [
                 \ #author.email
+              ]
+            }
+            if "orcid" in author {
+              if type(author.orcid) == str [
+                \ #link(author.orcid)
+              ] else [
+                \ #author.orcid
               ]
             }
           }))

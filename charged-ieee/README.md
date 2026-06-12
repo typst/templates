@@ -21,7 +21,7 @@ This template exports the `ieee` function with the following named arguments:
 - `title`: The paper's title as content.
 - `authors`: An array of author dictionaries. Each of the author dictionaries
   must have a `name` key and can have the keys `department`, `organization`,
-  `location`, and `email`. All keys accept content.
+  `location`, `email`, and `orcid`. All keys accept content.
 - `abstract`: The content of a brief summary of the paper or `none`. Appears at
   the top of the first column in boldface.
 - `index-terms`: Array of index terms to display after the abstract. Shall be
