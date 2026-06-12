@@ -15,17 +15,22 @@ typst init @preview/charged-ieee
 
 Typst will create a new directory with all the files needed to get you started.
 
+To render fonts correctly, you need to install `TeX Gyre Termes` and
+`TeX Gyre Cursor` on your system.
+
 ## Configuration
 This template exports the `ieee` function with the following named arguments:
 
 - `title`: The paper's title as content.
 - `authors`: An array of author dictionaries. Each of the author dictionaries
   must have a `name` key and can have the keys `department`, `organization`,
-  `location`, and `email`. All keys accept content.
+  `location`, `email`, and `orcid`. All keys accept content.
 - `abstract`: The content of a brief summary of the paper or `none`. Appears at
   the top of the first column in boldface.
 - `index-terms`: Array of index terms to display after the abstract. Shall be
   `content`.
+- `thanks`: The content equivalent to `thanks{}` in IEEEtran. Appears at the
+  bottom of the first page.
 - `paper-size`: Defaults to `us-letter`. Specify a [paper size
   string](https://typst.app/docs/reference/layout/page/#parameters-paper) to
   change the page format.
