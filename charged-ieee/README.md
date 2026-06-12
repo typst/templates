@@ -29,6 +29,8 @@ This template exports the `ieee` function with the following named arguments:
   the top of the first column in boldface.
 - `index-terms`: Array of index terms to display after the abstract. Shall be
   `content`.
+- `thanks`: The content equivalent to `thanks{}` in IEEEtran. Appears at the
+  bottom of the first page.
 - `paper-size`: Defaults to `us-letter`. Specify a [paper size
   string](https://typst.app/docs/reference/layout/page/#parameters-paper) to
   change the page format.

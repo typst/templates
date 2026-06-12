@@ -15,6 +15,10 @@
   // A list of index terms to display after the abstract.
   index-terms: (),
 
+  // Equivalent to `\thanks` in IEEEtran. Typically used for manuscript dates,
+  // funding notes, or author affiliations.
+  thanks: none,
+
   // The article's paper size. Also affects the margins.
   paper-size: "us-letter",
 
@@ -237,6 +241,21 @@
       [_Index Terms_---#h(weak: true, 0pt)#index-terms.join[, ]]
     }
     v(2pt)
+  }
+
+  // Display thanks.
+  if thanks != none {
+    place(
+      bottom,
+      float: true,
+      scope: "column",
+      {
+        set par(first-line-indent: (amount: 1em, all: true), leading: 0.45em)
+        set text(size: 8pt)
+        v(5pt)
+        thanks
+      },
+    )
   }
 
   // Display the paper's contents.
