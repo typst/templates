@@ -15,6 +15,9 @@ typst init @preview/charged-ieee
 
 Typst will create a new directory with all the files needed to get you started.
 
+To render fonts correctly, you need to install `TeX Gyre Termes` and
+`TeX Gyre Cursor` on your system.
+
 ## Configuration
 This template exports the `ieee` function with the following named arguments:
 
