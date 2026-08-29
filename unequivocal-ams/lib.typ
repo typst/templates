@@ -108,19 +108,21 @@
     if it.level == 1 {
       set align(center)
       set text(size: normal-size)
-      smallcaps[
+      block(sticky: true, smallcaps[
         #v(15pt, weak: true)
         #number
         #it.body
         #v(normal-size, weak: true)
-      ]
+      ])
       counter(figure.where(kind: "theorem")).update(0)
     } else {
-      v(11pt, weak: true)
-      number
-      let styled = if it.level == 2 { strong } else { emph }
-      styled(it.body + [. ])
-      h(7pt, weak: true)
+      block(sticky: true, {
+        v(11pt, weak: true)
+        number
+        let styled = if it.level == 2 { strong } else { emph }
+        styled(it.body + [. ])
+        h(7pt, weak: true)
+      })
     }
   }
 
