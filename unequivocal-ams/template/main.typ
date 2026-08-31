@@ -79,8 +79,8 @@ You can use tables like @solids.
     [*Cylinder*],
     $ pi h (D^2 - d^2) / 4 $,
     [$h$: height \
-      $D$: outer radius \
-      $d$: inner radius],
+     $D$: outer radius \
+     $d$: inner radius],
     [*Tetrahedron*],
     $ sqrt(2) / 12 a^3 $,
     [$a$: edge length]
@@ -96,5 +96,4 @@ Prove theorems, such as @thm.
 #proof[This is left as an exercise to the reader, given the complexity of the theorem.]
 
 = Background
-#lorem(187)
-
+#lorem(40)
