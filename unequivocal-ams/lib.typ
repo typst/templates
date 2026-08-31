@@ -108,16 +108,16 @@
     if it.level == 1 {
       set align(center)
       set text(size: normal-size)
-      block(sticky: true, smallcaps[
-        #v(15pt, weak: true)
+      v(15pt, weak: true)
+      block(smallcaps[
         #number
         #it.body
-        #v(normal-size, weak: true)
       ])
+      v(normal-size, weak: true)
       counter(figure.where(kind: "theorem")).update(0)
     } else {
-      block(sticky: true, {
-        v(11pt, weak: true)
+      v(11pt, weak: true)
+      block({
         number
         let styled = if it.level == 2 { strong } else { emph }
         styled(it.body + [. ])
