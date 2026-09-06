@@ -132,13 +132,13 @@
       1
     }
 
+    // IEEEtran conference \section is \normalfont\normalsize\scshape (10pt).
     set text(10pt, weight: 400)
     if it.level == 1 {
       // First-level headings are centered smallcaps.
       // We don't want to number the acknowledgment section.
       let is-ack = it.body in ([Acknowledgment], [Acknowledgement], [Acknowledgments], [Acknowledgements])
       set align(center)
-      set text(if is-ack { 10pt } else { 11pt })
       show: block.with(above: 15pt, below: 13.75pt, sticky: true)
       show: smallcaps
       if it.numbering != none and not is-ack {
