@@ -76,21 +76,27 @@
     spacing: 100%,
   )
 
-  // Configure the page and multi-column properties.
+  // IEEEtran.cls conference mode (V1.8b; still the class shipped in IEEE's
+  // June 2024 conference LaTeX zip): \columnsep 1pc, \textwidth 43pc,
+  // \textheight 9.25in, top margin 0.75in. a4paper keeps that text block
+  // and only changes the leftover margins.
   set columns(gutter: 12pt)
+  let ieee-text-width = 43 * 12pt
+  let ieee-text-height = 9.25in
+  let ieee-top-margin = 0.75in
+  let paper = if paper-size == "a4" {
+    (width: 210mm, height: 297mm)
+  } else {
+    (width: 8.5in, height: 11in)
+  }
   set page(
     columns: 2,
     paper: paper-size,
-    // The margins depend on the paper size.
-    margin: if paper-size == "a4" {
-      (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
-    } else {
-      (
-        x: (50pt / 216mm) * 100%,
-        top: (55pt / 279mm) * 100%,
-        bottom: (64pt / 279mm) * 100%,
-      )
-    }
+    margin: (
+      x: (paper.width - ieee-text-width) / 2,
+      top: ieee-top-margin,
+      bottom: paper.height - ieee-top-margin - ieee-text-height,
+    ),
   )
 
   // Configure equation numbering and spacing.
