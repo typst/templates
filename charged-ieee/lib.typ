@@ -122,7 +122,7 @@
   set list(indent: 10pt, body-indent: 9pt)
 
   // Configure headings.
-  // Display forms (I. / A. / …) are applied in the show rule below.
+  // Display forms (I. / A. / 1)) are applied in the show rule below.
   // Cross-references use IEEEtran \thesection / \thesubsection /
   // \thesubsubsection: I / I-A / I-A1.
   set heading(numbering: "I-A1")
@@ -160,8 +160,10 @@
       it.body
     } else [
       // Third level headings are run-ins too, but different.
+      // IEEEtran \thesubsubsectiondis is arabic 1) in \itshape.
       #if it.level == 3 {
-        numbering("a)", deepest)
+        set text(style: "italic")
+        numbering("1)", deepest)
         [ ]
       }
       _#(it.body):_
