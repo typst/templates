@@ -122,7 +122,10 @@
   set list(indent: 10pt, body-indent: 9pt)
 
   // Configure headings.
-  set heading(numbering: "I.A.a)")
+  // Display forms (I. / A. / …) are applied in the show rule below.
+  // Cross-references use IEEEtran \thesection / \thesubsection /
+  // \thesubsubsection: I / I-A / I-A1.
+  set heading(numbering: "I-A1")
   show heading: it => {
     // Find out the final number of the heading counter.
     let levels = counter(heading).get()
